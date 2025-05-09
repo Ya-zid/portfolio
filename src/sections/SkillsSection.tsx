@@ -1,0 +1,354 @@
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import SectionHeading from '../components/SectionHeading';
+import { Code, Database, Brain, Server, Globe, Lightbulb } from 'lucide-react';
+
+const skillsCategories = [
+  {
+    id: 'languages',
+    name: 'Programming Languages',
+    icon: <Code size={24} />,
+    skills: [
+      { name: 'Python', logo: '🐍', level: 95 },
+      { name: 'JavaScript', logo: '📜', level: 90 },
+      { name: 'TypeScript', logo: '💪', level: 85 },
+      { name: 'C++', logo: '⚡', level: 80 },
+      { name: 'Octave', logo: '📊', level: 85 },
+      { name: 'SQL', logo: '🗄️', level: 90 },
+      { name: 'Bash/Shell', logo: '🐚', level: 75 },
+      { name: 'Java', logo: '☕', level: 75 },
+      { name: 'HTML/CSS', logo: '🌐', level: 90 },
+      { name: 'PHP', logo: '🐘', level: 70 },
+      { name: 'Kotlin', logo: '🎨', level: 65 }
+    ]
+  },
+  {
+    id: 'databases',
+    name: 'Databases',
+    icon: <Database size={24} />,
+    skills: [
+      { name: 'PostgreSQL', logo: '🐘', level: 90 },
+      { name: 'MongoDB', logo: '🍃', level: 85 },
+      { name: 'Redis', logo: '🔴', level: 80 },
+      { name: 'MySQL', logo: '🐬', level: 85 },
+      { name: 'SQLite', logo: '📱', level: 80 },
+      { name: 'Supabase', logo: '📦', level: 75 },
+    ]
+  },
+  {
+    id: 'ml',
+    name: 'Machine Learning',
+    icon: <Brain size={24} />,
+    skills: [
+      { name: 'TensorFlow', logo: '🧠', level: 90 },
+      { name: 'PyTorch', logo: '🔥', level: 85 },
+      { name: 'Scikit-learn', logo: '🤖', level: 90 },
+      { name: 'Pandas', logo: '🐼', level: 95 },
+      { name: 'NumPy', logo: '🔢', level: 95 },
+      { name: 'Hugging Face', logo: '🤗', level: 85 },
+      { name: 'OpenCV', logo: '👁', level: 80 },
+      { name: 'Matplotlib', logo: '📊', level: 90 },
+      { name: 'Seaborn', logo: '📈', level: 85 },
+      { name: 'Plotly', logo: '📉', level: 80 },
+      { name: 'Streamlit', logo: '📱', level: 75 
+      },
+      { name: 'LangChain', logo: '🔗', level: 75 }
+    ]
+  },
+  {
+    id: 'deployment',
+    name: 'Deployment',
+    icon: <Server size={24} />,
+    skills: [
+      { name: 'Docker', logo: '🐳', level: 90 },
+      { name: 'Kubernetes', logo: '⚓', level: 50 },
+      { name: 'AWS', logo: '☁️', level: 65 },
+      { name: 'GitHub Actions', logo: '⚡', level: 80 },
+      { name: 'CI/CD', logo: '🔄', level: 75 }
+    ]
+  },
+  {
+    id: 'web',
+    name: 'Web Development',
+    icon: <Globe size={24} />,
+    skills: [
+      { name: 'React', logo: '⚛️', level: 90 },
+      { name: 'Node.js', logo: '💚', level: 85 },
+      { name: 'Tailwind CSS', logo: '🎨', level: 90 },
+      { name: 'Express', logo: '🚂', level: 85 },
+      { name: 'Next.js', logo: '▲', level: 80 },
+      { name: 'Flask', logo: '🐍', level: 80 },
+      { name: 'Laravel', logo: '🅻', level: 75 },
+      { name: 'FastAPI', logo: '⚡', level: 80 },
+      { name: 'GraphQL', logo: '🔗', level: 70 },
+      { name: 'REST APIs', logo: '🔗', level: 85}
+    ]
+  },
+  {
+    id: 'other',
+    name: 'Other Skills',
+    icon: <Lightbulb size={24} />,
+    skills: [
+      { name: 'Leadership & Team Management', level: 90 },
+      { name: 'Agile Methodologies', level: 90 },
+      { name: 'System Design', level: 85 },
+      { name: 'Strategic Planning', level: 90 },
+      { name: 'Product Management', level: 85 },
+      { name: 'Business Development', level: 85 },
+      { name: 'Public Speaking', level: 90 },
+      { name: 'Technical Writing', level: 85 },
+      { name: 'Problem Solving', level: 95 },
+      { name: 'Data Visualization', level: 90 },
+      { name: 'REST API Design', level: 85 }
+    ]
+  }
+];
+
+// 3D Skill Card Component
+const SkillCard: React.FC<{ 
+  skill: { name: string; logo?: string; level: number };
+  index: number;
+}> = ({ skill, index }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1
+  });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.4, delay: index * 0.05 }}
+      className="perspective"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <motion.div
+        className="bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm hover:shadow-md transition-all h-full flex flex-col items-center justify-center text-center"
+        animate={{
+          rotateX: isHovered ? 5 : 0,
+          rotateY: isHovered ? 5 : 0,
+          z: isHovered ? 10 : 0,
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 300,
+          damping: 15
+        }}
+      >
+        {skill.logo && (
+          <motion.span 
+            className="text-3xl mb-3 transform transition-transform"
+            animate={{ scale: isHovered ? 1.2 : 1 }}
+            role="img" 
+            aria-label={skill.name}
+          >
+            {skill.logo}
+          </motion.span>
+        )}
+        <h3 className="text-base font-medium text-slate-800 dark:text-slate-200 mb-2">
+          {skill.name}
+        </h3>
+        <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden mt-auto">
+          <motion.div 
+            className="h-full bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-400 rounded-full"
+            initial={{ width: 0 }}
+            animate={inView ? { width: `${skill.level}%` } : { width: 0 }}
+            transition={{ duration: 1, delay: index * 0.05 + 0.3 }}
+          />
+        </div>
+        <div className="flex justify-between w-full mt-1 text-xs text-slate-500 dark:text-slate-400">
+          <span>Beginner</span>
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.3, delay: index * 0.05 + 1.2 }}
+          >
+            {skill.level}%
+          </motion.span>
+          <span>Expert</span>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+const SkillsSection: React.FC = () => {
+  const [activeCategory, setActiveCategory] = useState(skillsCategories[0].id);
+  const [isChanging, setIsChanging] = useState(false);
+  
+  const currentCategory = skillsCategories.find(category => category.id === activeCategory);
+  
+  const handleCategoryChange = (categoryId: string) => {
+    if (categoryId !== activeCategory) {
+      setIsChanging(true);
+      setTimeout(() => {
+        setActiveCategory(categoryId);
+        setIsChanging(false);
+      }, 300);
+    }
+  };
+
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1
+  });
+
+  // Variants for animations
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1, y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 10
+      }
+    }
+  };
+
+  const tabVariants = {
+    inactive: {
+      color: 'var(--color-slate-700)',
+      backgroundColor: 'var(--color-slate-100)',
+    },
+    active: {
+      color: 'var(--color-white)',
+      backgroundColor: 'var(--color-blue-600)',
+      scale: 1.05,
+    },
+  };
+  
+  return (
+    <section id="skills" className="py-20 bg-gradient-to-b from-white to-slate-50 dark:from-slate-900 dark:to-slate-800 transition-colors duration-300">
+      <div className="container mx-auto px-4 md:px-6">
+        <motion.div
+          ref={ref}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          variants={containerVariants}
+        >
+          <SectionHeading 
+            title="Skills & Technologies" 
+            subtitle="My technical toolkit and areas of expertise." 
+            align="center"
+          />
+          
+          {/* Category Tabs - Animated */}
+          <motion.div 
+            className="flex flex-wrap justify-center gap-2 mb-12"
+            variants={containerVariants}
+          >
+            {skillsCategories.map(category => (
+              <motion.button
+                key={category.id}
+                onClick={() => handleCategoryChange(category.id)}
+                className={`flex items-center px-4 py-3 rounded-lg text-sm md:text-base transition-all relative overflow-hidden ${
+                  activeCategory === category.id
+                    ? 'text-white bg-blue-600'
+                    : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                }`}
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                animate={activeCategory === category.id ? 'active' : 'inactive'}
+                style={{
+                  '--color-white': 'rgb(255, 255, 255)',
+                  '--color-blue-600': 'rgb(37, 99, 235)',
+                  '--color-slate-700': 'rgb(51, 65, 85)',
+                  '--color-slate-100': 'rgb(243, 244, 246)',
+                } as any}
+              >
+                {activeCategory === category.id && (
+                  <motion.span
+                    className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-600 dark:to-blue-400 -z-10"
+                    layoutId="activeCategoryBackground"
+                    initial={false}
+                    transition={{
+                      type: 'spring',
+                      stiffness: 200,
+                      damping: 20,
+                    }}
+                  />
+                )}
+                <span className="mr-2">{category.icon}</span>
+                <span>{category.name}</span>
+              </motion.button>
+            ))}
+          </motion.div>
+          
+          {/* Skills Content with 3D hover effect */}
+          <div className="max-w-6xl mx-auto">
+            <motion.div 
+              className="bg-slate-50 dark:bg-slate-800 rounded-xl p-8 shadow-sm"
+              initial={{ y: 20, opacity: 0 }}
+              animate={inView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <motion.h3 
+                className="text-2xl font-bold text-slate-900 dark:text-white mb-8 flex items-center"
+                layout
+              >
+                <motion.span 
+                  className="mr-3 text-blue-600 dark:text-blue-400 p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg"
+                  layoutId="categoryIcon"
+                  initial={false}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 25
+                  }}
+                >
+                  {currentCategory?.icon}
+                </motion.span>
+                <motion.span layoutId="categoryTitle">
+                  {currentCategory?.name}
+                </motion.span>
+              </motion.h3>
+              
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeCategory}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                  className={isChanging ? 'pointer-events-none' : ''}
+                >
+                  {/* Grid layout for skills with masonry effect */}
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+                    {currentCategory?.skills.map((skill, index) => (
+                      <SkillCard key={skill.name} skill={skill} index={index} />
+                    ))}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Custom styles for 3D effect */}
+      <style jsx global>{`
+        .perspective {
+          perspective: 1000px;
+        }
+      `}</style>
+    </section>
+  );
+};
+
+export default SkillsSection;
