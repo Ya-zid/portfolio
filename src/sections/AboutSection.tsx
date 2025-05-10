@@ -21,7 +21,7 @@ const AboutSection: React.FC = () => {
               <div className="relative">
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 blur-md opacity-70"></div>
                 <img
-                  src="images/avatar.jpg"
+                  src="/images/avatar.jpg"
                   alt="Yazid"
                   className="relative w-28 h-28 object-cover rounded-full border-2 border-white/50"
                 />
