@@ -3,109 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import SectionHeading from '../components/SectionHeading';
 import { Code, Database, Brain, Server, Globe, Lightbulb } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
-const skillsCategories = [
-  {
-    id: 'languages',
-    name: 'Programming Languages',
-    icon: <Code size={24} />,
-    skills: [
-      { name: 'Python', logo: '🐍', level: 95 },
-      { name: 'JavaScript', logo: '📜', level: 90 },
-      { name: 'TypeScript', logo: '💪', level: 85 },
-      { name: 'C++', logo: '⚡', level: 80 },
-      { name: 'Octave', logo: '📊', level: 85 },
-      { name: 'SQL', logo: '🗄️', level: 90 },
-      { name: 'Bash/Shell', logo: '🐚', level: 75 },
-      { name: 'Java', logo: '☕', level: 75 },
-      { name: 'HTML/CSS', logo: '🌐', level: 90 },
-      { name: 'PHP', logo: '🐘', level: 70 },
-      { name: 'Kotlin', logo: '🎨', level: 65 }
-    ]
-  },
-  {
-    id: 'databases',
-    name: 'Databases',
-    icon: <Database size={24} />,
-    skills: [
-      { name: 'PostgreSQL', logo: '🐘', level: 90 },
-      { name: 'MongoDB', logo: '🍃', level: 85 },
-      { name: 'Redis', logo: '🔴', level: 80 },
-      { name: 'MySQL', logo: '🐬', level: 85 },
-      { name: 'SQLite', logo: '📱', level: 80 },
-      { name: 'Supabase', logo: '📦', level: 75 },
-    ]
-  },
-  {
-    id: 'ml',
-    name: 'Machine Learning',
-    icon: <Brain size={24} />,
-    skills: [
-      { name: 'TensorFlow', logo: '🧠', level: 90 },
-      { name: 'PyTorch', logo: '🔥', level: 85 },
-      { name: 'Scikit-learn', logo: '🤖', level: 90 },
-      { name: 'Pandas', logo: '🐼', level: 95 },
-      { name: 'NumPy', logo: '🔢', level: 95 },
-      { name: 'Hugging Face', logo: '🤗', level: 85 },
-      { name: 'OpenCV', logo: '👁', level: 80 },
-      { name: 'Matplotlib', logo: '📊', level: 90 },
-      { name: 'Seaborn', logo: '📈', level: 85 },
-      { name: 'Plotly', logo: '📉', level: 80 },
-      { name: 'Streamlit', logo: '📱', level: 75 
-      },
-      { name: 'LangChain', logo: '🔗', level: 75 }
-    ]
-  },
-  {
-    id: 'deployment',
-    name: 'Deployment',
-    icon: <Server size={24} />,
-    skills: [
-      { name: 'Docker', logo: '🐳', level: 90 },
-      { name: 'Kubernetes', logo: '⚓', level: 50 },
-      { name: 'AWS', logo: '☁️', level: 65 },
-      { name: 'GitHub Actions', logo: '⚡', level: 80 },
-      { name: 'CI/CD', logo: '🔄', level: 75 }
-    ]
-  },
-  {
-    id: 'web',
-    name: 'Web Development',
-    icon: <Globe size={24} />,
-    skills: [
-      { name: 'React', logo: '⚛️', level: 90 },
-      { name: 'Node.js', logo: '💚', level: 85 },
-      { name: 'Tailwind CSS', logo: '🎨', level: 90 },
-      { name: 'Express', logo: '🚂', level: 85 },
-      { name: 'Next.js', logo: '▲', level: 80 },
-      { name: 'Flask', logo: '🐍', level: 80 },
-      { name: 'Laravel', logo: '🅻', level: 75 },
-      { name: 'FastAPI', logo: '⚡', level: 80 },
-      { name: 'GraphQL', logo: '🔗', level: 70 },
-      { name: 'REST APIs', logo: '🔗', level: 85}
-    ]
-  },
-  {
-    id: 'other',
-    name: 'Other Skills',
-    icon: <Lightbulb size={24} />,
-    skills: [
-      { name: 'Leadership & Team Management', level: 90 },
-      { name: 'Agile Methodologies', level: 90 },
-      { name: 'System Design', level: 85 },
-      { name: 'Strategic Planning', level: 90 },
-      { name: 'Product Management', level: 85 },
-      { name: 'Business Development', level: 85 },
-      { name: 'Public Speaking', level: 90 },
-      { name: 'Technical Writing', level: 85 },
-      { name: 'Problem Solving', level: 95 },
-      { name: 'Data Visualization', level: 90 },
-      { name: 'REST API Design', level: 85 }
-    ]
-  }
-];
-
-// 3D Skill Card Component
 const SkillCard: React.FC<{ 
   skill: { name: string; logo?: string; level: number };
   index: number;
@@ -115,6 +14,7 @@ const SkillCard: React.FC<{
     triggerOnce: true,
     threshold: 0.1
   });
+  const { t } = useLanguage();
 
   return (
     <motion.div
@@ -161,7 +61,7 @@ const SkillCard: React.FC<{
           />
         </div>
         <div className="flex justify-between w-full mt-1 text-xs text-slate-500 dark:text-slate-400">
-          <span>Beginner</span>
+          <span>{t('skills.beginner')}</span>
           <motion.span
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : { opacity: 0 }}
@@ -169,7 +69,7 @@ const SkillCard: React.FC<{
           >
             {skill.level}%
           </motion.span>
-          <span>Expert</span>
+          <span>{t('skills.expert')}</span>
         </div>
       </motion.div>
     </motion.div>
@@ -177,6 +77,101 @@ const SkillCard: React.FC<{
 };
 
 const SkillsSection: React.FC = () => {
+  const { t } = useLanguage();
+  
+  const skillsCategories = [
+    {
+      id: 'languages',
+      name: t('skills.categories.languages'),
+      icon: <Code size={24} />,
+      skills: [
+        { name: 'Python', logo: '🐍', level: 95 },
+        { name: 'JavaScript', logo: '📜', level: 90 },
+        { name: 'C++', logo: '⚡', level: 80 },
+        { name: 'Octave', logo: '📊', level: 85 },
+        { name: 'SQL', logo: '🗄️', level: 90 },
+        { name: 'Bash/Shell', logo: '🐚', level: 75 },
+        { name: 'Java', logo: '☕', level: 75 },
+        { name: 'HTML/CSS', logo: '🌐', level: 90 },
+        { name: 'PHP', logo: '🐘', level: 70 },
+        { name: 'Kotlin', logo: '🎨', level: 65 }
+      ]
+    },
+    {
+      id: 'databases',
+      name: t('skills.categories.databases'),
+      icon: <Database size={24} />,
+      skills: [
+        { name: 'PostgreSQL', logo: '🐘', level: 90 },
+        { name: 'MongoDB', logo: '🍃', level: 85 },
+        { name: 'MySQL', logo: '🐬', level: 85 },
+        { name: 'SQLite', logo: '📱', level: 80 },
+        { name: 'Supabase', logo: '📦', level: 75 },
+      ]
+    },
+    {
+      id: 'ml',
+      name: t('skills.categories.ml'),
+      icon: <Brain size={24} />,
+      skills: [
+        { name: 'TensorFlow', logo: '🧠', level: 90 },
+        { name: 'PyTorch', logo: '🔥', level: 85 },
+        { name: 'Scikit-learn', logo: '🤖', level: 90 },
+        { name: 'Pandas', logo: '🐼', level: 95 },
+        { name: 'NumPy', logo: '🔢', level: 95 },
+        { name: 'OpenCV', logo: '👁', level: 80 },
+        { name: 'Matplotlib', logo: '📊', level: 90 },
+        { name: 'Seaborn', logo: '📈', level: 85 },
+        { name: 'Plotly', logo: '📉', level: 80 },
+        { name: 'Streamlit', logo: '📱', level: 75 },
+        { name: 'LangChain', logo: '🔗', level: 75 }
+      ]
+    },
+    {
+      id: 'deployment',
+      name: t('skills.categories.deployment'),
+      icon: <Server size={24} />,
+      skills: [
+        { name: 'Docker', logo: '🐳', level: 90 },
+        { name: 'AWS', logo: '☁️', level: 50 },
+        { name: 'GitHub Actions', logo: '⚡', level: 80 },
+        { name: 'CI/CD', logo: '🔄', level: 75 }
+      ]
+    },
+    {
+      id: 'web',
+      name: t('skills.categories.web'),
+      icon: <Globe size={24} />,
+      skills: [
+        { name: 'React', logo: '⚛️', level: 90 },
+        { name: 'Node.js', logo: '💚', level: 85 },
+        { name: 'Tailwind CSS', logo: '🎨', level: 90 },
+        { name: 'Express', logo: '🚂', level: 85 },
+        { name: 'Next.js', logo: '▲', level: 80 },
+        { name: 'Laravel', logo: '🅻', level: 75 },
+        { name: 'GraphQL', logo: '🔗', level: 70 },
+      ]
+    },
+    {
+      id: 'other',
+      name: t('skills.categories.other'),
+      icon: <Lightbulb size={24} />,
+      skills: [
+        { name: t('skills.other.leadership'), level: 90 },
+        { name: t('skills.other.agile'), level: 90 },
+        { name: t('skills.other.systemDesign'), level: 85 },
+        { name: t('skills.other.strategicPlanning'), level: 90 },
+        { name: t('skills.other.productManagement'), level: 85 },
+        { name: t('skills.other.businessDevelopment'), level: 85 },
+        { name: t('skills.other.publicSpeaking'), level: 90 },
+        { name: t('skills.other.technicalWriting'), level: 85 },
+        { name: t('skills.other.problemSolving'), level: 95 },
+        { name: t('skills.other.dataVisualization'), level: 90 },
+        { name: t('skills.other.apiDesign'), level: 85 }
+      ]
+    }
+  ];
+  
   const [activeCategory, setActiveCategory] = useState(skillsCategories[0].id);
   const [isChanging, setIsChanging] = useState(false);
   
@@ -219,18 +214,6 @@ const SkillsSection: React.FC = () => {
       }
     }
   };
-
-  const tabVariants = {
-    inactive: {
-      color: 'var(--color-slate-700)',
-      backgroundColor: 'var(--color-slate-100)',
-    },
-    active: {
-      color: 'var(--color-white)',
-      backgroundColor: 'var(--color-blue-600)',
-      scale: 1.05,
-    },
-  };
   
   return (
     <section id="skills" className="py-20 bg-gradient-to-b from-white to-slate-50 dark:from-slate-900 dark:to-slate-800 transition-colors duration-300">
@@ -242,8 +225,8 @@ const SkillsSection: React.FC = () => {
           variants={containerVariants}
         >
           <SectionHeading 
-            title="Skills & Technologies" 
-            subtitle="My technical toolkit and areas of expertise." 
+            title={t('skills.title')} 
+            subtitle={t('skills.subtitle')} 
             align="center"
           />
           

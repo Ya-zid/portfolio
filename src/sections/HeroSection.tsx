@@ -2,8 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import { ChevronDown, Linkedin, Github } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const HeroSection: React.FC = () => {
+  const { t } = useLanguage();
+
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects');
     if (projectsSection) {
@@ -21,7 +24,7 @@ const HeroSection: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          Hello, I'm <span className="text-blue-600 dark:text-blue-400">Yazid</span>
+          {t('hero.hello')} <span className="text-blue-600 dark:text-blue-400">Yazid</span>
         </motion.h1>
 
         <motion.div
@@ -31,7 +34,12 @@ const HeroSection: React.FC = () => {
           transition={{ duration: 1, delay: 0.2 }}
         >
           <TypeAnimation
-            sequence={['Building intelligent systems.', 2000, 'Specializing in AI and ML.', 2000]}
+            sequence={[
+              t('hero.building'), 
+              2000, 
+              t('hero.specializing'), 
+              2000
+            ]}
             wrapper="span"
             speed={50}
             repeat={Infinity}
@@ -77,13 +85,13 @@ const HeroSection: React.FC = () => {
             onClick={scrollToProjects}
             className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-md transition-all"
           >
-            View Projects
+            {t('hero.viewProjects')}
           </button>
           <a
             href="#contact"
             className="px-6 py-3 bg-transparent border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white rounded-lg transition-all"
           >
-            Contact Me
+            {t('hero.contactMe')}
           </a>
         </motion.div>
 

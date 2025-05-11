@@ -1,7 +1,10 @@
 import React from 'react';
 import SectionHeading from '../components/SectionHeading';
+import { useLanguage } from '../context/LanguageContext';
 
 const AboutSection: React.FC = () => {
+  const { t } = useLanguage();
+  
   return (
     <section
       id="about"
@@ -9,8 +12,8 @@ const AboutSection: React.FC = () => {
     >
       <div className="container mx-auto px-4 md:px-6">
         <SectionHeading
-          title="About Me"
-          subtitle="Curiosity-driven. Detail-focused. Future-oriented."
+          title={t('about.title')}
+          subtitle={t('about.subtitle')}
           align="center"
         />
 
@@ -33,7 +36,7 @@ const AboutSection: React.FC = () => {
               <div className="mt-1 text-sm text-slate-600 dark:text-slate-300 font-light tracking-wide">
                 <span className="inline-flex items-center">
                   <span className="h-px w-5 bg-blue-400 mr-2"></span>
-                  Eager to collaborate
+                  {t('about.status')}
                 </span>
               </div>
               
@@ -43,7 +46,7 @@ const AboutSection: React.FC = () => {
                 rel="noopener noreferrer" 
                 className="mt-4 w-full py-2 px-3 bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/80 text-slate-800 dark:text-white text-sm rounded border border-blue-400/30 hover:border-blue-400 transition-all flex items-center justify-center group"
               >
-                <span className="font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">VIEW RESUME</span>
+                <span className="font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{t('about.viewResume')}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
@@ -53,19 +56,16 @@ const AboutSection: React.FC = () => {
 
           <div className="text-center md:text-left mt-6 md:mt-0 max-w-4xl mx-auto">
             <p className="text-base text-slate-700 dark:text-slate-300 mb-4">
-             Hello, I'm Yazid — an AI engineer-in-training At <a href="https://www.ensia.edu.dz" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">ENSIA</a> Algiers, with hands-on experience in telecom systems, full-stack development, and machine learning. I'm driven by a deep interest in building intelligent, scalable solutions that bridge theory and real-world application.
+              {t('about.paragraph1')}
             </p>
             <p className="text-base text-slate-700 dark:text-slate-300 mb-4">
-              My mindset is a mix of precision and big-picture thinking. I'm deeply curious, always learning, and drawn to projects that require both analytical depth and strategic foresight. Whether exploring AI, cognitive science, or design, I value thoughtful execution and purpose-driven work.
+              {t('about.paragraph2')}
             </p>
             <p className="text-base text-slate-700 dark:text-slate-300 mb-4">
-              I'm currently pursuing international research opportunities and capstone collaborations in AI. I enjoy thinking strategically, exploring cognitive science, and building clean, user-friendly interfaces.
-            </p>
-            <p className="text-base text-slate-700 dark:text-slate-300 mb-4">
-              My engineering program at <a href="https://www.ensia.edu.dz" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">ENSIA</a>, specializing in AI and Data Science, has equipped me with the skills and knowledge necessary to solve real world problems.I have learned about various AI-related topics including Computer Vision, Ethics, Machine and Deep Learning, Statistics, Calculus & Linear Algebra, Software Engineering & Development, Data Structures & Databases, as well as Business and Entrepreneurship.
+              {t('about.paragraph3')}
             </p>
             <p className="text-base text-slate-700 dark:text-slate-300">
-              I'm motivated by impact — not just building things that work, but building things that matter. If that resonates with you, we're already aligned.
+              {t('about.paragraph4')}
             </p>
           </div>
         </div>

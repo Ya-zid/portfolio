@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Moon, Sun, Menu, X } from 'lucide-react';
+import { Moon, Sun, Menu, X, Globe } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import { useLanguage } from '../context/LanguageContext';
 
 const NavBar: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
+  const { language, toggleLanguage, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,26 +59,63 @@ const NavBar: React.FC = () => {
               onClick={() => scrollToSection('projects')}
               className="text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             >
-              Projects
+              {t('nav.projects')}
             </button>
             <button 
               onClick={() => scrollToSection('experience')}
               className="text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             >
-              Experience
+              {t('nav.experience')}
             </button>
             <button 
               onClick={() => scrollToSection('skills')}
               className="text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             >
-              Skills
+              {t('nav.skills')}
             </button>
             <button 
               onClick={() => scrollToSection('contact')}
               className="text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             >
-              Contact
+              {t('nav.contact')}
             </button>
+            
+            {/* Language Toggle */}
+            <div className="relative">
+              <button 
+                onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
+                className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors flex items-center"
+                aria-label="Change language"
+              >
+                <Globe size={18} />
+                <span className="ml-1">{language.toUpperCase()}</span>
+              </button>
+              
+              {languageMenuOpen && (
+                <div className="absolute top-full right-0 mt-1 bg-white dark:bg-slate-800 rounded-md shadow-md z-50">
+                  <button 
+                    onClick={() => {
+                      if (language !== 'en') toggleLanguage();
+                      setLanguageMenuOpen(false);
+                    }}
+                    className={`block w-full text-left px-4 py-2 ${language === 'en' ? 'text-blue-600 dark:text-blue-400' : 'text-slate-700 dark:text-slate-200'} hover:bg-slate-100 dark:hover:bg-slate-700`}
+                  >
+                    English
+                  </button>
+                  <button 
+                    onClick={() => {
+                      if (language !== 'fr') toggleLanguage();
+                      setLanguageMenuOpen(false);
+                    }}
+                    className={`block w-full text-left px-4 py-2 ${language === 'fr' ? 'text-blue-600 dark:text-blue-400' : 'text-slate-700 dark:text-slate-200'} hover:bg-slate-100 dark:hover:bg-slate-700`}
+                  >
+                    Français
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Theme Toggle */}
             <button 
               onClick={toggleTheme}
               className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
@@ -87,6 +127,40 @@ const NavBar: React.FC = () => {
 
           {/* Mobile Menu Button */}
           <div className="flex items-center md:hidden space-x-4">
+            {/* Language Toggle Mobile */}
+            <div className="relative">
+              <button 
+                onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
+                className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200"
+                aria-label="Change language"
+              >
+                <Globe size={18} />
+              </button>
+              
+              {languageMenuOpen && (
+                <div className="absolute top-full right-0 mt-1 bg-white dark:bg-slate-800 rounded-md shadow-md z-50">
+                  <button 
+                    onClick={() => {
+                      if (language !== 'en') toggleLanguage();
+                      setLanguageMenuOpen(false);
+                    }}
+                    className={`block w-full text-left px-4 py-2 ${language === 'en' ? 'text-blue-600 dark:text-blue-400' : 'text-slate-700 dark:text-slate-200'} hover:bg-slate-100 dark:hover:bg-slate-700`}
+                  >
+                    English
+                  </button>
+                  <button 
+                    onClick={() => {
+                      if (language !== 'fr') toggleLanguage();
+                      setLanguageMenuOpen(false);
+                    }}
+                    className={`block w-full text-left px-4 py-2 ${language === 'fr' ? 'text-blue-600 dark:text-blue-400' : 'text-slate-700 dark:text-slate-200'} hover:bg-slate-100 dark:hover:bg-slate-700`}
+                  >
+                    Français
+                  </button>
+                </div>
+              )}
+            </div>
+
             <button 
               onClick={toggleTheme}
               className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200"
@@ -113,25 +187,25 @@ const NavBar: React.FC = () => {
               onClick={() => scrollToSection('projects')}
               className="text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 py-2 transition-colors"
             >
-              Projects
+              {t('nav.projects')}
             </button>
             <button 
               onClick={() => scrollToSection('experience')}
               className="text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 py-2 transition-colors"
             >
-              Experience
+              {t('nav.experience')}
             </button>
             <button 
               onClick={() => scrollToSection('skills')}
               className="text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 py-2 transition-colors"
             >
-              Skills
+              {t('nav.skills')}
             </button>
             <button 
               onClick={() => scrollToSection('contact')}
               className="text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 py-2 transition-colors"
             >
-              Contact
+              {t('nav.contact')}
             </button>
           </div>
         </div>

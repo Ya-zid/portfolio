@@ -3,73 +3,70 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import SectionHeading from '../components/SectionHeading';
 import { Calendar, MapPin, Briefcase, Award, ArrowRight, Lightbulb } from 'lucide-react';
-
-// Sample experience data
-const experienceData = [
-  {
-    id: 1,
-    role: 'Intern - Network Operations Center (NOC)',
-    company: 'Algérie Télécom',
-    location: 'Ben Aknoun, Algiers',
-    period: 'Sep 2024 – Oct 2024',
-    description:
-      'As part of the Network Operations Center (NOC), I gained practical exposure to real-time network monitoring, infrastructure maintenance, and incident resolution within Algeria’s national telecom backbone.',
-    achievements: [
-      'Collaborated with engineers on troubleshooting voice line, FTTX, and LTE network issues',
-      'Contributed to improvements in an internal PHP-based monitoring system, optimizing performance by 60%',
-      'Engaged in on-site technical interventions and infrastructure documentation',
-    ],
-    highlights: [
-      { icon: <Award size={18} />, text: 'Hands-on experience with systems like Fiberhome, ZTE, Huawei, and Nokia' },
-      { icon: <Lightbulb size={18} />, text: 'Enhanced communication and stress management under real-time operations' },
-    ]
-  },
-  {
-    id: 2,
-    role: 'Product Owner (Former CEO)',
-    company: 'Gostu',
-    location: 'Algiers, Algeria',
-    period: 'Jul 2023 – Nov 2024',
-    description:
-      'Led the early-stage development of Gostu, a student-oriented platform aiming to improve academic and career navigation across Algeria through peer insights and tools.',
-    achievements: [
-      'Reached over 15,000 unique visitors within the first two months of beta launch',
-      'Built and led a multidisciplinary team to execute on design, development, and marketing',
-      'Pioneered development of one of Algeria’s first intelligent AI bots for educational Q&A (unpublished)',
-    ],
-    highlights: [
-      { icon: <Award size={18} />, text: 'Achieved strong traction with zero external funding' },
-      { icon: <Lightbulb size={18} />, text: 'Introduced smart educational assistance tools to the local student ecosystem' },
-    ]
-  },
-  {
-    id: 3,
-    role: 'President',
-    company: 'Skill&Tell Club – ENSIA',
-    location: 'Algiers, Algeria',
-    period: '2021 – 2024',
-    description:
-      'As founding president of ENSIA’s first official student club, I led Skill&Tell for three years, empowering students through events, workshops, and community-building initiatives.',
-    achievements: [
-      'Organized over 20 events including hackathons, talks, and skill-development workshops',
-      'Mentored successive generations of student leaders and built strong cross-department collaboration',
-      'Fostered a culture of continuous learning and peer support across the campus',
-    ],
-    highlights: [
-      { icon: <Award size={18} />, text: 'Pioneered ENSIA’s first recognized student club' },
-      { icon: <Lightbulb size={18} />, text: 'Recognized for student impact and community engagement by faculty and peers' },
-    ]
-  }
-];
-
-
+import { useLanguage } from '../context/LanguageContext';
 
 const ExperienceSection: React.FC = () => {
   const [expandedId, setExpandedId] = useState<number | null>(1);
+  const { t } = useLanguage();
   
   const toggleExpand = (id: number) => {
     setExpandedId(expandedId === id ? null : id);
   };
+
+  // Experience data with translation keys
+  const experienceData = [
+    {
+      id: 1,
+      role: t('experience.noc.role'),
+      company: t('experience.noc.company'),
+      location: t('experience.noc.location'),
+      period: t('experience.noc.period'),
+      description: t('experience.noc.description'),
+      achievements: [
+        t('experience.noc.achievement1'),
+        t('experience.noc.achievement2'),
+        t('experience.noc.achievement3'),
+      ],
+      highlights: [
+        { icon: <Award size={18} />, text: t('experience.noc.highlight1') },
+        { icon: <Lightbulb size={18} />, text: t('experience.noc.highlight2') },
+      ]
+    },
+    {
+      id: 2,
+      role: t('experience.gostu.role'),
+      company: t('experience.gostu.company'),
+      location: t('experience.gostu.location'),
+      period: t('experience.gostu.period'),
+      description: t('experience.gostu.description'),
+      achievements: [
+        t('experience.gostu.achievement1'),
+        t('experience.gostu.achievement2'),
+        t('experience.gostu.achievement3'),
+      ],
+      highlights: [
+        { icon: <Award size={18} />, text: t('experience.gostu.highlight1') },
+        { icon: <Lightbulb size={18} />, text: t('experience.gostu.highlight2') },
+      ]
+    },
+    {
+      id: 3,
+      role: t('experience.skilltell.role'),
+      company: t('experience.skilltell.company'),
+      location: t('experience.skilltell.location'),
+      period: t('experience.skilltell.period'),
+      description: t('experience.skilltell.description'),
+      achievements: [
+        t('experience.skilltell.achievement1'),
+        t('experience.skilltell.achievement2'),
+        t('experience.skilltell.achievement3'),
+      ],
+      highlights: [
+        { icon: <Award size={18} />, text: t('experience.skilltell.highlight1') },
+        { icon: <Lightbulb size={18} />, text: t('experience.skilltell.highlight2') },
+      ]
+    }
+  ];
 
   return (
     <section id="experience" className="py-20 bg-gradient-to-b from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 transition-colors duration-300">
@@ -81,8 +78,8 @@ const ExperienceSection: React.FC = () => {
           viewport={{ once: true }}
         >
           <SectionHeading 
-            title="Experience" 
-            subtitle="My professional journey in AI and machine learning." 
+            title={t('experience.title')} 
+            subtitle={t('experience.subtitle')} 
             align="center"
           />
         </motion.div>
@@ -193,7 +190,7 @@ const ExperienceSection: React.FC = () => {
                           transition={{ delay: 0.2 }}
                         >
                           <Briefcase size={16} className="mr-2 text-blue-500 dark:text-blue-400" />
-                          Key Achievements
+                          {t('experience.keyAchievements')}
                         </motion.h5>
                         
                         <motion.ul className="list-none space-y-2 text-slate-600 dark:text-slate-400 mb-4">
@@ -247,7 +244,7 @@ const ExperienceSection: React.FC = () => {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      {isExpanded ? 'Show Less' : 'Show More'}
+                      {isExpanded ? t('experience.showLess') : t('experience.showMore')}
                     </motion.button>
                   </motion.div>
                 </motion.div>

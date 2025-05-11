@@ -3,14 +3,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import SectionHeading from '../components/SectionHeading';
 import { ExternalLink, Github, Code2, X } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const projectsData = [
   {
     id: 1,
-    title: 'Neural Network Threat Detection',
-    description: 'An intelligent system for detecting and preventing network attacks using AI and machine learning. The system analyzes traffic logs to identify malicious patterns and proactively detect anomalies in real-time.',
+    titleKey: 'projects.neural.title',
+    descriptionKey: 'projects.neural.description',
     image: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     tags: ['Machine Learning', 'Network Security', 'Python', 'XGBoost', 'SQLite'],
     github: 'https://github.com/Ya-zid/WNCSProject',
@@ -41,10 +42,10 @@ def monitor_traffic(traffic_data, binary_model, attack_model, db_connection):
   },
   {
     id: 2,
-    title: 'Eye Care Scheduler Easy',
-    description: 'A web-based application that simplifies the process of booking and managing eye care appointments. Features include patient booking, appointment management, and administrative tools for clinic staff.',
+    titleKey: 'projects.eyecare.title',
+    descriptionKey: 'projects.eyecare.description',
     image: '/images/eyecare.png',
-    tags: ['React', 'Node.js', 'Tailwind CSS', 'Supabase', 'Express'],
+    tags: ['React', 'Express.js', 'Tailwind CSS', 'Supabase', 'Express'],
     url: 'https://eye-care-scheduler-easy-cogjzwxs3-ya-zids-projects.vercel.app/',
     github: 'https://github.com/example/eye-care-scheduler',
     isPrivateRepo: true,
@@ -96,8 +97,8 @@ export default function AppointmentForm({ doctors, availableTimes }) {
   },
   {
     id: 3,
-    title: 'Medical Prescription Analysis',
-    description: 'A collaborative machine learning project that analyzes medical prescriptions to derive valuable insights. The system identifies medicine associations, analyzes prescription trends, and clusters prescriptions to detect illness types.',
+    titleKey: 'projects.medical.title',
+    descriptionKey: 'projects.medical.description',
     image: '/images/ordai.png',
     tags: ['Machine Learning', 'Data Analysis', 'Python', 'Healthcare', 'Association Rules'],
     github: 'https://github.com/Ya-zid/Project-Ketchup-main',
@@ -152,8 +153,8 @@ for med, conf, lift in recommended_medicines:
   },
   {
     id: 4,
-    title: 'NLP Cyberbullying Detection',
-    description: 'A natural language processing project that detects cyberbullying in the Algerian dialect. The system leverages machine learning models and data preprocessing methods to analyze text data and classify it as cyberbullying or not.',
+    titleKey: 'projects.cyberbullying.title',
+    descriptionKey: 'projects.cyberbullying.description',
     image: '/images/clearnetai.png',
     tags: ['NLP', 'Machine Learning', 'Python', 'Text Classification', 'Social Media'],
     github: 'https://github.com/Ya-zid/NLPCyberBullyingProject',
@@ -205,9 +206,10 @@ def predict_cyberbullying(text, model, vectorizer):
   },
   {
     id: 5,
-    title: 'Semantic Search Engine',
-    description: 'A semantic search engine that uses state-of-the-art NLP models like BERT and MiniLM to find relevant results based on meaning rather than keywords. Includes an interactive Streamlit front-end for user queries.',
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080&h=720',    tags: ['NLP', 'BERT', 'Streamlit', 'Search Engine', 'Python'],
+    titleKey: 'projects.semantic.title',
+    descriptionKey: 'projects.semantic.description',
+    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080&h=720',
+    tags: ['NLP', 'BERT', 'Streamlit', 'Search Engine', 'Python'],
     github: 'https://github.com/Ya-zid/SemanticSearchEngine',
     isPrivateRepo: false,
     codeSnippet: `
@@ -246,10 +248,10 @@ def semantic_search(query, model, doc_embeddings, documents, top_k=5):
   },
   {
     id: 6,
-    title: 'Gostu.net - Educational Platform',
-    description: 'An all-in-one educational platform designed to revolutionize the learning experience for students in Algeria. Features live study rooms, interactive forums, comprehensive study materials, and flexible subscription plans to meet diverse student needs.',
+    titleKey: 'projects.gostu.title',
+    descriptionKey: 'projects.gostu.description',
     image: '/images/gostu.png',
-    tags: ['EdTech', 'React', 'Node.js', 'MongoDB', 'WebRTC', 'Subscription Model'],
+    tags: ['EdTech', 'React', 'Laravel', 'MongoDB', 'WebRTC', 'Subscription Model'],
     url: 'https://gostu.net',
     github: 'https://github.com/example/gostu-platform',
     isPrivateRepo: true,
@@ -322,10 +324,28 @@ const LiveStudyRoom = () => {
 }
 ];
 
-// Extract unique tags
-const allTags = ['All', ...Array.from(new Set(projectsData.flatMap(project => project.tags)))];
+// Extract unique tags and select only the most important ones
+const allTags = [];
+const tagCounts = {};
 
-const ProjectCard: React.FC<{ project: typeof projectsData[0] }> = ({ project }) => {
+// Count occurrences of each tag
+projectsData.forEach(project => {
+  project.tags.forEach(tag => {
+    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+  });
+});
+
+// Add the most common tags (those that appear in at least 2 projects)
+// Also add important skill categories (AI, ML, Web Dev)
+const importantCategories = ['Machine Learning', 'NLP', 'React', 'Python', 'AI', 'EdTech'];
+const commonTags = Object.entries(tagCounts)
+  .filter(([tag, count]) => count >= 2 || importantCategories.includes(tag))
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 6) // Limit to 6 most common tags
+  .map(([tag]) => tag);
+
+const ProjectCard = ({ project }) => {
+  const { t } = useLanguage();
   const [showCode, setShowCode] = useState(false);
   const [showGitHubModal, setShowGitHubModal] = useState(false);
   const [ref, inView] = useInView({
@@ -333,7 +353,7 @@ const ProjectCard: React.FC<{ project: typeof projectsData[0] }> = ({ project })
     threshold: 0.1
   });
 
-  const handleGitHubClick = (e: React.MouseEvent) => {
+  const handleGitHubClick = (e) => {
     e.preventDefault();
     if (project.isPrivateRepo) {
       setShowGitHubModal(true);
@@ -354,7 +374,7 @@ const ProjectCard: React.FC<{ project: typeof projectsData[0] }> = ({ project })
       <div className="relative h-56 overflow-hidden">
         <img 
           src={project.image} 
-          alt={project.title} 
+          alt={t(project.titleKey)} 
           className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
@@ -379,7 +399,7 @@ const ProjectCard: React.FC<{ project: typeof projectsData[0] }> = ({ project })
                 className="p-2 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                aria-label="Live Demo"
+                aria-label={t('projects.viewLive')}
               >
                 <ExternalLink size={20} />
               </motion.a>
@@ -389,7 +409,7 @@ const ProjectCard: React.FC<{ project: typeof projectsData[0] }> = ({ project })
               className="p-2 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              aria-label="View Code"
+              aria-label={t('projects.viewCode')}
             >
               <Code2 size={20} />
             </motion.button>
@@ -415,7 +435,7 @@ const ProjectCard: React.FC<{ project: typeof projectsData[0] }> = ({ project })
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white">Repository Access</h3>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white">{t('projects.accessTitle')}</h3>
                 <button 
                   onClick={() => setShowGitHubModal(false)}
                   className="p-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
@@ -425,10 +445,10 @@ const ProjectCard: React.FC<{ project: typeof projectsData[0] }> = ({ project })
               </div>
               <div className="mb-6">
                 <p className="text-slate-600 dark:text-slate-400 mb-4">
-                  This project's source code is stored in a private organization repository and cannot be publicly shared.
+                  {t('projects.privateRepo')}
                 </p>
                 <p className="text-slate-600 dark:text-slate-400">
-                  Feel free to contact me for more details about the implementation or to discuss potential collaboration.
+                  {t('projects.contactForDetails')}
                 </p>
               </div>
               <div className="flex justify-end space-x-3">
@@ -436,7 +456,7 @@ const ProjectCard: React.FC<{ project: typeof projectsData[0] }> = ({ project })
                   onClick={() => setShowGitHubModal(false)}
                   className="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
                 >
-                  Close
+                  {t('projects.close')}
                 </button>
                 <a
                   href="#contact"
@@ -446,7 +466,7 @@ const ProjectCard: React.FC<{ project: typeof projectsData[0] }> = ({ project })
                   }}
                   className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                 >
-                  Contact Me
+                  {t('projects.contactMe')}
                 </a>
               </div>
             </motion.div>
@@ -457,10 +477,10 @@ const ProjectCard: React.FC<{ project: typeof projectsData[0] }> = ({ project })
       {/* Project Content */}
       <div className="p-6">
         <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
-          {project.title}
+          {t(project.titleKey)}
         </h3>
         <p className="text-slate-600 dark:text-slate-400 mb-4">
-          {project.description}
+          {t(project.descriptionKey)}
         </p>
         
         {/* Code Snippet */}
@@ -487,35 +507,42 @@ const ProjectCard: React.FC<{ project: typeof projectsData[0] }> = ({ project })
           )}
         </AnimatePresence>
         
-        {/* Project Tags */}
+        {/* Project Tags - Limit to 4 most important tags */}
         <div className="flex flex-wrap gap-2 mt-4">
-          {project.tags.map(tag => (
-            <motion.span 
-              key={tag} 
-              className="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-md"
-              whileHover={{ scale: 1.05 }}
-            >
-              {tag}
-            </motion.span>
-          ))}
+          {project.tags
+            .slice(0, 4)  // Only show up to 4 tags per project
+            .map(tag => (
+              <motion.span 
+                key={tag} 
+                className="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-md"
+                whileHover={{ scale: 1.05 }}
+              >
+                {tag}
+              </motion.span>
+            ))
+          }
         </div>
       </div>
     </motion.div>
   );
 };
 
-const ProjectsSection: React.FC = () => {
+const ProjectsSection = () => {
+  const { t } = useLanguage();
   const [selectedTag, setSelectedTag] = useState('All');
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1
   });
   
-  const filteredProjects = selectedTag === 'All' 
+  // Add "All" tag to the beginning
+  const displayTags = ['All', ...commonTags];
+  
+  const filteredProjects = selectedTag === 'All'
     ? projectsData 
     : projectsData.filter(project => project.tags.includes(selectedTag));
 
-  return (
+return (
     <section id="projects" className="py-20 bg-white dark:bg-slate-900 transition-colors duration-300">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
@@ -525,8 +552,8 @@ const ProjectsSection: React.FC = () => {
           transition={{ duration: 0.5 }}
         >
           <SectionHeading 
-            title="Projects" 
-            subtitle="Explore some of my recent work in AI and machine learning." 
+            title={t('projects.title')} 
+            subtitle={t('projects.subtitle')} 
             align="center"
           />
         </motion.div>
@@ -546,7 +573,7 @@ const ProjectsSection: React.FC = () => {
           initial="hidden"
           animate="show"
         >
-          {allTags.map(tag => (
+          {displayTags.map(tag => (
             <motion.button
               key={tag}
               onClick={() => setSelectedTag(tag)}
@@ -558,7 +585,7 @@ const ProjectsSection: React.FC = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {tag}
+              {tag === 'All' ? t('projects.all') : tag}
             </motion.button>
           ))}
         </motion.div>
