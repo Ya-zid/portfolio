@@ -34,6 +34,7 @@ const HeroSection: React.FC = () => {
           transition={{ duration: 1, delay: 0.2 }}
         >
           <TypeAnimation
+            key={t('hero.building')}
             sequence={[
               t('hero.building'), 
               2000, 
