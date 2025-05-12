@@ -154,7 +154,7 @@ const ContactSection: React.FC = () => {
                     {t('contact.phone')}
                   </h4>
                   <p className="text-slate-600 dark:text-slate-400">
-                    +213 (5) 5887-6953
+                    +213 558 876 953
                   </p>
                 </div>
               </div>
