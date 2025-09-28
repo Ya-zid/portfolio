@@ -321,6 +321,201 @@ const LiveStudyRoom = () => {
       }
     });
 `
+},
+  {
+    id: 7,
+    titleKey: 'projects.base360.title',
+    descriptionKey: 'projects.base360.description',
+    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080&h=720',
+    tags: ['React', 'FastAPI', 'Tailwind CSS', 'Full-Stack', 'SaaS'],
+    url: 'https://base360.com',
+    github: 'https://github.com/example/base360-portal',
+    isPrivateRepo: true,
+    codeSnippet: `
+// GuestPreCheckIn.tsx - Dynamic pre-check-in flow component
+
+interface PreCheckInStep {
+  id: string;
+  type: 'id-upload' | 'deposit' | 'waiver' | 'upsell';
+  required: boolean;
+  config: StepConfiguration;
+}
+
+const GuestPreCheckIn: React.FC = () => {
+  const { bookingCode } = useParams();
+  const [currentStep, setCurrentStep] = useState(0);
+  const [steps, setSteps] = useState<PreCheckInStep[]>([]);
+  const [guestData, setGuestData] = useState<GuestData>({});
+  const { t, language } = useTranslation();
+
+  useEffect(() => {
+    // Fetch property-specific configuration
+    fetchPropertyConfig(bookingCode).then(config => {
+      const dynamicSteps = buildStepsFromConfig(config);
+      setSteps(dynamicSteps);
+    });
+  }, [bookingCode]);
+
+  const handleStepCompletion = async (stepData: any) => {
+    const step = steps[currentStep];
+
+    // Process based on step type
+    switch(step.type) {
+      case 'id-upload':
+        await uploadGuestID(stepData.idImage, bookingCode);
+        break;
+      case 'deposit':
+        await processDeposit(stepData.amount, stepData.paymentMethod);
+        break;
+      case 'upsell':
+        await saveUpsellSelection(stepData.selectedUpsells);
+        break;
+    }
+
+    // Update guest data and move to next step
+    setGuestData(prev => ({ ...prev, [step.id]: stepData }));
+
+    if (currentStep < steps.length - 1) {
+      setCurrentStep(currentStep + 1);
+    } else {
+      // Complete pre-check-in process
+      await completePreCheckIn(bookingCode, guestData);
+      navigateToConfirmation();
+    }
+  };
+
+  // Render current step component dynamically
+  const renderStep = () => {
+    const step = steps[currentStep];
+    const StepComponent = stepComponents[step.type];
+
+    return (
+      <StepComponent
+        config={step.config}
+        onComplete={handleStepCompletion}
+        language={language}
+      />
+    );
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <ProgressBar current={currentStep + 1} total={steps.length} />
+      <div className="container mx-auto px-4 py-8">
+        {renderStep()}
+      </div>
+    </div>
+  );
+};
+`
+},
+  {
+    id: 8,
+    titleKey: 'projects.jade.title',
+    descriptionKey: 'projects.jade.description',
+    image: 'https://images.unsplash.com/photo-1556075798-4825dfaaf498?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080&h=720',
+    tags: ['React', 'Node.js', 'PostgreSQL', 'ERP', 'Full-Stack'],
+    github: 'https://github.com/example/jade-creation-erp',
+    isPrivateRepo: true,
+    codeSnippet: `
+// ProductionWorkflow.tsx - 7-stage production lifecycle management
+
+interface ProductionStage {
+  id: number;
+  name: string;
+  status: 'pending' | 'in-progress' | 'completed' | 'blocked';
+  role: 'manager' | 'laboratory' | 'production' | 'warehouse';
+  requiresApproval: boolean;
+}
+
+const ProductionWorkflowEngine: React.FC<{ orderId: string }> = ({ orderId }) => {
+  const [currentStage, setCurrentStage] = useState<number>(1);
+  const [order, setOrder] = useState<ProductionOrder | null>(null);
+  const { user } = useAuth();
+  const { t } = useTranslation();
+
+  const stages: ProductionStage[] = [
+    { id: 1, name: 'planning', status: 'pending', role: 'manager', requiresApproval: false },
+    { id: 2, name: 'ingredients', status: 'pending', role: 'laboratory', requiresApproval: false },
+    { id: 3, name: 'accessories', status: 'pending', role: 'production', requiresApproval: false },
+    { id: 4, name: 'authorization', status: 'pending', role: 'manager', requiresApproval: true },
+    { id: 5, name: 'material_transfer', status: 'pending', role: 'warehouse', requiresApproval: false },
+    { id: 6, name: 'production', status: 'pending', role: 'production', requiresApproval: false },
+    { id: 7, name: 'completion', status: 'pending', role: 'production', requiresApproval: false }
+  ];
+
+  const handleStageComplete = async (stageId: number, data: any) => {
+    try {
+      // Validate user role for current stage
+      const stage = stages.find(s => s.id === stageId);
+      if (!stage || !hasPermission(user.role, stage.role)) {
+        throw new Error('Insufficient permissions');
+      }
+
+      // Process stage-specific logic
+      switch(stageId) {
+        case 2: // Ingredients selection
+          await api.post(\`/production/\${orderId}/ingredients\`, {
+            formula: data.selectedFormula,
+            quantities: calculateQuantities(data.selectedFormula, order.targetQuantity)
+          });
+          break;
+
+        case 4: // Manager authorization
+          await api.post(\`/production/\${orderId}/authorize\`, {
+            approved: data.approved,
+            comments: data.comments,
+            signature: user.digitalSignature
+          });
+          break;
+
+        case 6: // Production execution
+          await api.post(\`/production/\${orderId}/execute\`, {
+            actualOutput: data.actualOutput,
+            defects: data.defects,
+            breakage: data.breakage,
+            qualityChecks: data.qualityChecks
+          });
+          break;
+      }
+
+      // Update stage status and advance workflow
+      await updateStageStatus(orderId, stageId, 'completed');
+
+      // Send notifications to next stage owner
+      await notifyNextStageOwner(orderId, stageId + 1);
+
+      setCurrentStage(stageId + 1);
+    } catch (error) {
+      notification.error({
+        message: t('production.stage.error'),
+        description: error.message
+      });
+    }
+  };
+
+  return (
+    <div className="production-workflow">
+      <Steps current={currentStage - 1}>
+        {stages.map(stage => (
+          <Step
+            key={stage.id}
+            title={t(\`production.stages.\${stage.name}\`)}
+            status={stage.status}
+            icon={getStageIcon(stage)}
+          />
+        ))}
+      </Steps>
+
+      <StageComponent
+        stage={stages[currentStage - 1]}
+        order={order}
+        onComplete={handleStageComplete}
+      />
+    </div>
+  );
+};
+`
 }
 ];
 

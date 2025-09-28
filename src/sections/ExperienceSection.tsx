@@ -17,6 +17,40 @@ const ExperienceSection: React.FC = () => {
   const experienceData = [
     {
       id: 1,
+      role: t('experience.atpm.role'),
+      company: t('experience.atpm.company'),
+      location: t('experience.atpm.location'),
+      period: t('experience.atpm.period'),
+      description: t('experience.atpm.description'),
+      achievements: [
+        t('experience.atpm.achievement1'),
+        t('experience.atpm.achievement2'),
+        t('experience.atpm.achievement3'),
+      ],
+      highlights: [
+        { icon: <Award size={18} />, text: t('experience.atpm.highlight1') },
+        { icon: <Lightbulb size={18} />, text: t('experience.atpm.highlight2') },
+      ]
+    },
+    {
+      id: 2,
+      role: t('experience.base360.role'),
+      company: t('experience.base360.company'),
+      location: t('experience.base360.location'),
+      period: t('experience.base360.period'),
+      description: t('experience.base360.description'),
+      achievements: [
+        t('experience.base360.achievement1'),
+        t('experience.base360.achievement2'),
+        t('experience.base360.achievement3'),
+      ],
+      highlights: [
+        { icon: <Award size={18} />, text: t('experience.base360.highlight1') },
+        { icon: <Lightbulb size={18} />, text: t('experience.base360.highlight2') },
+      ]
+    },
+    {
+      id: 3,
       role: t('experience.noc.role'),
       company: t('experience.noc.company'),
       location: t('experience.noc.location'),
@@ -33,7 +67,7 @@ const ExperienceSection: React.FC = () => {
       ]
     },
     {
-      id: 2,
+      id: 4,
       role: t('experience.gostu.role'),
       company: t('experience.gostu.company'),
       location: t('experience.gostu.location'),
@@ -50,7 +84,7 @@ const ExperienceSection: React.FC = () => {
       ]
     },
     {
-      id: 3,
+      id: 5,
       role: t('experience.skilltell.role'),
       company: t('experience.skilltell.company'),
       location: t('experience.skilltell.location'),

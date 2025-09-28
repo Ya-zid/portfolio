@@ -62,6 +62,12 @@ const translations = {
     
     'projects.gostu.title': 'Gostu.net - Educational Platform',
     'projects.gostu.description': 'An all-in-one educational platform designed to revolutionize the learning experience for students in Algeria. Features live study rooms, interactive forums, comprehensive study materials, and flexible subscription plans to meet diverse student needs.',
+
+    'projects.base360.title': 'Base360 Guest Portal',
+    'projects.base360.description': 'Contributed to the development of Base360\'s guest portal system as an AI Engineer, implementing intelligent pre-check-in flows, dynamic upsell features with automated language detection, and comprehensive guest management tools. Built scalable full-stack solutions using React and FastAPI to enhance the hospitality automation experience.',
+
+    'projects.jade.title': 'JADE CRÉATION - ERP System',
+    'projects.jade.description': 'Designed and developed a comprehensive Enterprise Resource Planning system for a perfume manufacturing company. Built a full-stack solution managing the complete production lifecycle from raw materials to finished products, implementing sophisticated workflow automation, multi-role authorization systems, and real-time inventory tracking with multi-language support.',
     
     // Experience section
     'experience.title': 'Experience',
@@ -69,6 +75,30 @@ const translations = {
     'experience.keyAchievements': 'Key Achievements',
     'experience.showMore': 'Show More',
     'experience.showLess': 'Show Less',
+
+    // AT Project Manager Experience
+    'experience.atpm.role': 'Project Manager - Startup Incubator',
+    'experience.atpm.company': 'Algérie Télécom',
+    'experience.atpm.location': 'Algiers, Algeria',
+    'experience.atpm.period': 'Jun 2025 – Present',
+    'experience.atpm.description': 'Leading startup mentorship and incubation programs at Algérie Télécom\'s innovation hub, guiding entrepreneurs through various growth phases, organizing events, and fostering a thriving startup ecosystem.',
+    'experience.atpm.achievement1': 'Mentoring and guiding startups through ideation, development, and scaling phases',
+    'experience.atpm.achievement2': 'Organizing and coordinating startup events, workshops, and networking sessions',
+    'experience.atpm.achievement3': 'Providing strategic guidance and helping startups navigate technical and business challenges',
+    'experience.atpm.highlight1': 'Startup ecosystem development and mentorship',
+    'experience.atpm.highlight2': 'Event management and strategic consulting',
+
+    // Base360 Experience
+    'experience.base360.role': 'AI Engineer',
+    'experience.base360.company': 'Base360 / Flex Living',
+    'experience.base360.location': 'Remote',
+    'experience.base360.period': 'Jun 2024 – Sep 2024',
+    'experience.base360.description': 'Contributed as an AI Engineer to Base360\'s guest portal development, focusing on intelligent automation and full-stack solutions for hospitality management systems.',
+    'experience.base360.achievement1': 'Developed intelligent pre-check-in flows with automated ID verification and multi-step guest validation processes',
+    'experience.base360.achievement2': 'Implemented dynamic upsell system with property-based configuration and automatic multi-language detection using AI',
+    'experience.base360.achievement3': 'Built comprehensive guest management tools including house manual builder and step-by-step check-in instructions',
+    'experience.base360.highlight1': 'Full-stack development with React, FastAPI, and Tailwind CSS',
+    'experience.base360.highlight2': 'Applied AI/ML techniques for language detection and guest experience optimization',
 
     // NOC Experience
     'experience.noc.role': 'Intern - Network Operations Center (NOC)',
@@ -222,12 +252,42 @@ const translations = {
     'projects.gostu.title': 'Gostu.net - Plateforme Éducative',
     'projects.gostu.description': 'Une plateforme éducative tout-en-un conçue pour révolutionner l\'expérience d\'apprentissage des étudiants en Algérie. Comprend des salles d\'étude en direct, des forums interactifs, des supports d\'étude complets et des plans d\'abonnement flexibles pour répondre aux divers besoins des étudiants.',
 
+    'projects.base360.title': 'Portail Client Base360',
+    'projects.base360.description': 'Contributeur au développement du système de portail client de Base360 en tant qu\'Ingénieur IA, implémentant des flux de pré-enregistrement intelligents, des fonctionnalités de vente incitative dynamique avec détection automatique de langue, et des outils complets de gestion des clients. Création de solutions full-stack évolutives avec React et FastAPI pour améliorer l\'expérience d\'automatisation de l\'hospitalité.',
+
+    'projects.jade.title': 'JADE CRÉATION - Système ERP',
+    'projects.jade.description': 'Conception et développement d\'un système complet de planification des ressources d\'entreprise pour une société de fabrication de parfums. Création d\'une solution full-stack gérant le cycle de production complet des matières premières aux produits finis, implémentant une automatisation sophistiquée des flux de travail, des systèmes d\'autorisation multi-rôles et un suivi d\'inventaire en temps réel avec support multilingue.',
+
 // Experience section
     'experience.title': 'Expérience',
     'experience.subtitle': 'Mon parcours professionnel en IA et en apprentissage automatique.',
     'experience.keyAchievements': 'Réalisations Clés',
     'experience.showMore': 'Voir Plus',
     'experience.showLess': 'Voir Moins',
+
+    // AT Project Manager Experience
+    'experience.atpm.role': 'Chef de Projet - Incubateur de Startups',
+    'experience.atpm.company': 'Algérie Télécom',
+    'experience.atpm.location': 'Alger, Algérie',
+    'experience.atpm.period': 'Juin 2025 – Présent',
+    'experience.atpm.description': 'Direction des programmes de mentorat et d\'incubation de startups au hub d\'innovation d\'Algérie Télécom, guidant les entrepreneurs à travers diverses phases de croissance, organisant des événements et favorisant un écosystème de startups florissant.',
+    'experience.atpm.achievement1': 'Mentorat et accompagnement de startups à travers les phases d\'idéation, de développement et d\'échelle',
+    'experience.atpm.achievement2': 'Organisation et coordination d\'événements, d\'ateliers et de sessions de réseautage pour startups',
+    'experience.atpm.achievement3': 'Fourniture d\'orientations stratégiques et aide aux startups pour naviguer les défis techniques et commerciaux',
+    'experience.atpm.highlight1': 'Développement d\'écosystème de startups et mentorat',
+    'experience.atpm.highlight2': 'Gestion d\'événements et conseil stratégique',
+
+    // Base360 Experience
+    'experience.base360.role': 'Ingénieur IA',
+    'experience.base360.company': 'Base360 / Flex Living',
+    'experience.base360.location': 'À distance',
+    'experience.base360.period': 'Juin 2024 – Sep 2024',
+    'experience.base360.description': 'Contributeur en tant qu\'Ingénieur IA au développement du portail client de Base360, en se concentrant sur l\'automatisation intelligente et les solutions full-stack pour les systèmes de gestion hôtelière.',
+    'experience.base360.achievement1': 'Développement de flux de pré-enregistrement intelligents avec vérification automatique d\'identité et processus de validation des clients en plusieurs étapes',
+    'experience.base360.achievement2': 'Implémentation d\'un système de vente incitative dynamique avec configuration basée sur la propriété et détection automatique multilingue utilisant l\'IA',
+    'experience.base360.achievement3': 'Création d\'outils complets de gestion des clients incluant un générateur de manuel de maison et des instructions d\'enregistrement étape par étape',
+    'experience.base360.highlight1': 'Développement full-stack avec React, FastAPI et Tailwind CSS',
+    'experience.base360.highlight2': 'Application de techniques IA/ML pour la détection de langue et l\'optimisation de l\'expérience client',
 
     // NOC Experience
     'experience.noc.role': 'Stagiaire - Centre d\'Opérations Réseau (NOC)',
