@@ -103,17 +103,20 @@ const ExperienceSection: React.FC = () => {
   ];
 
   return (
-    <section id="experience" className="py-20 bg-gradient-to-b from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 transition-colors duration-300">
-      <div className="container mx-auto px-4 md:px-6">
+    <section id="experience" className="py-24 bg-white dark:bg-neutral-950 relative overflow-hidden transition-colors duration-300">
+      {/* Background Elements */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#8b5cf608_1px,transparent_1px),linear-gradient(to_bottom,#8b5cf608_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          <SectionHeading 
-            title={t('experience.title')} 
-            subtitle={t('experience.subtitle')} 
+          <SectionHeading
+            title={t('experience.title')}
+            subtitle={t('experience.subtitle')}
             align="center"
           />
         </motion.div>
@@ -129,81 +132,81 @@ const ExperienceSection: React.FC = () => {
             const isExpanded = expandedId === experience.id;
 
             return (
-              <motion.div 
+              <motion.div
                 key={experience.id}
                 ref={ref}
-                initial={{ opacity: 0, y: 50 }}
-                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-                transition={{ 
-                  duration: 0.5,
-                  delay: index * 0.2
+                initial={{ opacity: 0, x: -50 }}
+                animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+                transition={{
+                  duration: 0.6,
+                  delay: index * 0.15
                 }}
-                className={`relative pl-8 pb-12 ${
-                  index !== experienceData.length - 1 ? 'before:content-[""] before:absolute before:left-3 before:top-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-blue-400 before:to-blue-200 dark:before:from-blue-600 dark:before:to-blue-900/50' : ''
+                className={`relative pl-12 pb-16 ${
+                  index !== experienceData.length - 1 ? 'before:content-[""] before:absolute before:left-[15px] before:top-0 before:h-full before:w-[2px] before:bg-gradient-to-b before:from-brand-500 before:via-accent-cyan before:to-brand-400 dark:before:from-brand-600 dark:before:via-accent-cyan dark:before:to-brand-500' : ''
                 }`}
               >
-                {/* Timeline Dot with Animation */}
-                <motion.div 
-                  className="absolute left-0 top-0 w-6 h-6 rounded-full bg-blue-500 dark:bg-blue-400 flex items-center justify-center ring-4 ring-white dark:ring-slate-800 z-10"
-                  initial={{ scale: 0 }}
-                  animate={inView ? { scale: 1 } : { scale: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.2 + 0.2 }}
+                {/* Timeline Dot with Glow Effect */}
+                <motion.div
+                  className="absolute left-0 top-1 w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-accent-cyan flex items-center justify-center ring-4 ring-white dark:ring-neutral-950 shadow-glow z-10"
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={inView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }}
+                  transition={{ duration: 0.5, delay: index * 0.15 + 0.2 }}
                 >
-                  <motion.div 
-                    className="w-2 h-2 rounded-full bg-white"
-                    animate={{ scale: [1, 1.5, 1] }}
+                  <motion.div
+                    className="w-3 h-3 rounded-full bg-white"
+                    animate={{ scale: [1, 1.3, 1] }}
                     transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
                   />
                 </motion.div>
                 
                 {/* Content Card */}
-                <motion.div 
-                  className={`bg-white dark:bg-slate-900 rounded-xl shadow-sm p-6 ml-4 hover:shadow-md transition-all duration-300 border-l-4 ${
-                    isExpanded ? 'border-blue-500 dark:border-blue-400' : 'border-transparent'
+                <motion.div
+                  className={`group relative glass-effect rounded-3xl p-8 ml-6 hover:shadow-glass-lg transition-all duration-300 cursor-pointer ${
+                    isExpanded ? 'border-2 border-brand-500/50 shadow-glow' : 'border border-brand-200/20 dark:border-brand-800/20'
                   }`}
                   layoutId={`card-container-${experience.id}`}
                   onClick={() => toggleExpand(experience.id)}
-                  whileHover={{ x: 4 }}
+                  whileHover={{ x: 8, scale: 1.01 }}
                 >
-                  <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2 mb-4">
+                  <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-6">
                     <motion.div layoutId={`title-container-${experience.id}`}>
-                      <motion.h3 
-                        className="text-xl font-bold text-slate-900 dark:text-white"
+                      <motion.h3
+                        className="text-2xl font-display font-bold text-neutral-900 dark:text-white mb-2"
                         layoutId={`title-${experience.id}`}
                       >
                         {experience.role}
                       </motion.h3>
-                      <motion.h4 
-                        className="text-lg font-medium text-blue-600 dark:text-blue-400"
+                      <motion.h4
+                        className="text-lg font-semibold bg-gradient-to-r from-brand-500 to-accent-cyan bg-clip-text text-transparent"
                         layoutId={`company-${experience.id}`}
                       >
                         {experience.company}
                       </motion.h4>
                     </motion.div>
-                    
-                    <motion.div 
-                      className="flex flex-col text-slate-500 dark:text-slate-400 text-sm"
+
+                    <motion.div
+                      className="flex flex-col text-neutral-500 dark:text-neutral-400 text-sm gap-2"
                       layoutId={`meta-container-${experience.id}`}
                     >
-                      <motion.div 
-                        className="flex items-center mb-1"
+                      <motion.div
+                        className="flex items-center gap-2"
                         layoutId={`period-${experience.id}`}
                       >
-                        <Calendar size={14} className="mr-1" />
-                        <span>{experience.period}</span>
+                        <Calendar size={16} className="text-brand-500" />
+                        <span className="font-medium">{experience.period}</span>
                       </motion.div>
-                      <motion.div 
-                        className="flex items-center"
+                      <motion.div
+                        className="flex items-center gap-2"
                         layoutId={`location-${experience.id}`}
                       >
-                        <MapPin size={14} className="mr-1" />
-                        <span>{experience.location}</span>
+                        <MapPin size={16} className="text-brand-500" />
+                        <span className="font-medium">{experience.location}</span>
                       </motion.div>
                     </motion.div>
                   </div>
-                  
-                  <motion.p 
-                    className="text-slate-600 dark:text-slate-400 mb-4"
+
+                  <motion.p
+                    className="text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed"
                     layoutId={`description-${experience.id}`}
                   >
                     {experience.description}
@@ -217,48 +220,51 @@ const ExperienceSection: React.FC = () => {
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <motion.h5 
-                          className="font-medium text-slate-900 dark:text-white flex items-center mb-2"
+                        <motion.h5
+                          className="font-display font-semibold text-neutral-900 dark:text-white flex items-center gap-2 mb-4"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           transition={{ delay: 0.2 }}
                         >
-                          <Briefcase size={16} className="mr-2 text-blue-500 dark:text-blue-400" />
+                          <div className="p-2 bg-gradient-to-br from-brand-500 to-accent-cyan rounded-lg">
+                            <Briefcase size={18} className="text-white" />
+                          </div>
                           {t('experience.keyAchievements')}
                         </motion.h5>
-                        
-                        <motion.ul className="list-none space-y-2 text-slate-600 dark:text-slate-400 mb-4">
+
+                        <motion.ul className="list-none space-y-3 text-neutral-600 dark:text-neutral-400 mb-6">
                           {experience.achievements.map((achievement, i) => (
-                            <motion.li 
+                            <motion.li
                               key={i}
-                              className="flex items-start"
+                              className="flex items-start gap-3 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200/50 dark:border-neutral-800/50"
                               initial={{ opacity: 0, x: -10 }}
                               animate={{ opacity: 1, x: 0 }}
                               transition={{ delay: 0.3 + i * 0.1 }}
                             >
-                              <ArrowRight size={14} className="mr-2 mt-1.5 text-blue-500 dark:text-blue-400 flex-shrink-0" />
-                              <span>{achievement}</span>
+                              <ArrowRight size={16} className="mt-0.5 text-brand-500 flex-shrink-0" />
+                              <span className="leading-relaxed">{achievement}</span>
                             </motion.li>
                           ))}
                         </motion.ul>
                         
                         {experience.highlights && (
-                          <motion.div 
-                            className="pt-2 border-t border-slate-200 dark:border-slate-700"
+                          <motion.div
+                            className="pt-4 border-t border-neutral-200 dark:border-neutral-800"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.4 }}
                           >
-                            <div className="flex flex-wrap gap-2 mt-2">
+                            <div className="flex flex-wrap gap-3 mt-4">
                               {experience.highlights.map((highlight, i) => (
                                 <motion.div
                                   key={i}
-                                  className="flex items-center bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 px-3 py-1.5 rounded-full text-sm"
+                                  className="flex items-center gap-2 glass-effect border border-brand-200/30 dark:border-brand-800/30 text-brand-700 dark:text-brand-300 px-4 py-2 rounded-full text-sm font-medium"
                                   initial={{ scale: 0.8, opacity: 0 }}
                                   animate={{ scale: 1, opacity: 1 }}
                                   transition={{ delay: 0.5 + i * 0.1 }}
+                                  whileHover={{ scale: 1.05 }}
                                 >
-                                  <span className="mr-1.5 text-blue-500 dark:text-blue-400">{highlight.icon}</span>
+                                  <span className="text-brand-500 dark:text-brand-400">{highlight.icon}</span>
                                   <span>{highlight.text}</span>
                                 </motion.div>
                               ))}
@@ -269,16 +275,22 @@ const ExperienceSection: React.FC = () => {
                     )}
                   </AnimatePresence>
 
-                  <motion.div 
-                    className="flex justify-center mt-2"
+                  <motion.div
+                    className="flex justify-center mt-6"
                     layoutId={`expand-button-${experience.id}`}
                   >
                     <motion.button
-                      className="text-blue-500 dark:text-blue-400 text-sm flex items-center"
+                      className="px-6 py-2 rounded-full glass-effect border border-brand-200/30 dark:border-brand-800/30 text-brand-600 dark:text-brand-400 text-sm font-medium hover:bg-brand-50 dark:hover:bg-brand-950 transition-all flex items-center gap-2"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      {isExpanded ? t('experience.showLess') : t('experience.showMore')}
+                      <span>{isExpanded ? t('experience.showLess') : t('experience.showMore')}</span>
+                      <motion.div
+                        animate={{ rotate: isExpanded ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        ▼
+                      </motion.div>
                     </motion.button>
                   </motion.div>
                 </motion.div>

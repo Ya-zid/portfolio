@@ -22,56 +22,40 @@ const SkillCard: React.FC<{
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="perspective"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="bg-white dark:bg-neutral-900 p-5 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:border-brand-400/50 dark:hover:border-brand-600/50 hover:shadow-lg transition-all h-full flex flex-col items-center justify-center text-center"
     >
-      <motion.div
-        className="bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm hover:shadow-md transition-all h-full flex flex-col items-center justify-center text-center"
-        animate={{
-          rotateX: isHovered ? 5 : 0,
-          rotateY: isHovered ? 5 : 0,
-          z: isHovered ? 10 : 0,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 300,
-          damping: 15
-        }}
-      >
-        {skill.logo && (
-          <motion.span 
-            className="text-3xl mb-3 transform transition-transform"
-            animate={{ scale: isHovered ? 1.2 : 1 }}
-            role="img" 
-            aria-label={skill.name}
-          >
-            {skill.logo}
-          </motion.span>
-        )}
-        <h3 className="text-base font-medium text-slate-800 dark:text-slate-200 mb-2">
-          {skill.name}
-        </h3>
-        <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden mt-auto">
-          <motion.div 
-            className="h-full bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-400 rounded-full"
-            initial={{ width: 0 }}
-            animate={inView ? { width: `${skill.level}%` } : { width: 0 }}
-            transition={{ duration: 1, delay: index * 0.05 + 0.3 }}
-          />
-        </div>
-        <div className="flex justify-between w-full mt-1 text-xs text-slate-500 dark:text-slate-400">
-          <span>{t('skills.beginner')}</span>
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.3, delay: index * 0.05 + 1.2 }}
-          >
-            {skill.level}%
-          </motion.span>
-          <span>{t('skills.expert')}</span>
-        </div>
-      </motion.div>
+      {skill.logo && (
+        <span
+          className="text-3xl mb-3"
+          role="img"
+          aria-label={skill.name}
+        >
+          {skill.logo}
+        </span>
+      )}
+      <h3 className="text-base font-semibold text-neutral-800 dark:text-neutral-200 mb-3">
+        {skill.name}
+      </h3>
+      <div className="w-full h-2 bg-neutral-200 dark:bg-neutral-800 rounded-full overflow-hidden mt-auto">
+        <motion.div
+          className="h-full bg-gradient-to-r from-brand-500 to-accent-cyan rounded-full"
+          initial={{ width: 0 }}
+          animate={inView ? { width: `${skill.level}%` } : { width: 0 }}
+          transition={{ duration: 1, delay: index * 0.05 + 0.3 }}
+        />
+      </div>
+      <div className="flex justify-between w-full mt-2 text-xs text-neutral-500 dark:text-neutral-400">
+        <span>{t('skills.beginner')}</span>
+        <motion.span
+          className="font-medium text-brand-600 dark:text-brand-400"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.3, delay: index * 0.05 + 1.2 }}
+        >
+          {skill.level}%
+        </motion.span>
+        <span>{t('skills.expert')}</span>
+      </div>
     </motion.div>
   );
 };
@@ -216,7 +200,7 @@ const SkillsSection: React.FC = () => {
   };
   
   return (
-    <section id="skills" className="py-20 bg-gradient-to-b from-white to-slate-50 dark:from-slate-900 dark:to-slate-800 transition-colors duration-300">
+    <section id="skills" className="py-24 bg-white dark:bg-neutral-950 transition-colors duration-300">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
           ref={ref}
@@ -224,15 +208,15 @@ const SkillsSection: React.FC = () => {
           animate={inView ? "visible" : "hidden"}
           variants={containerVariants}
         >
-          <SectionHeading 
-            title={t('skills.title')} 
-            subtitle={t('skills.subtitle')} 
+          <SectionHeading
+            title={t('skills.title')}
+            subtitle={t('skills.subtitle')}
             align="center"
           />
-          
+
           {/* Category Tabs - Animated */}
-          <motion.div 
-            className="flex flex-wrap justify-center gap-2 mb-12"
+          <motion.div
+            className="flex flex-wrap justify-center gap-3 mb-12"
             variants={containerVariants}
           >
             {skillsCategories.map(category => (
@@ -241,8 +225,8 @@ const SkillsSection: React.FC = () => {
                 onClick={() => handleCategoryChange(category.id)}
                 className={`flex items-center px-4 py-3 rounded-lg text-sm md:text-base transition-all relative overflow-hidden ${
                   activeCategory === category.id
-                    ? 'text-white bg-blue-600'
-                    : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                    ? 'bg-gradient-to-r from-brand-500 to-accent-cyan text-white shadow-lg shadow-brand-500/30'
+                    : 'bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 hover:border-brand-400/50 dark:hover:border-brand-600/50'
                 }`}
                 variants={itemVariants}
                 whileHover={{ scale: 1.05 }}

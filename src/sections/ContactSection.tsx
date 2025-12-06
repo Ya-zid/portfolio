@@ -111,33 +111,33 @@ const ContactSection: React.FC = () => {
   };
   
   return (
-    <section id="contact" className="py-20 bg-slate-50 dark:bg-slate-800 transition-colors duration-300">
+    <section id="contact" className="py-24 bg-neutral-50 dark:bg-neutral-900 transition-colors duration-300">
       <div className="container mx-auto px-4 md:px-6">
-        <SectionHeading 
-          title={t('contact.title')} 
-          subtitle={t('contact.subtitle')} 
+        <SectionHeading
+          title={t('contact.title')}
+          subtitle={t('contact.subtitle')}
           align="center"
         />
-        
+
         <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8">
           {/* Contact Information */}
-          <div className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-xl shadow-sm p-6 md:p-8">
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">
+          <div className="lg:col-span-2 bg-white dark:bg-neutral-950 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-lg p-6 md:p-8">
+            <h3 className="text-2xl font-display font-bold text-neutral-900 dark:text-white mb-8">
               {t('contact.getInTouch')}
             </h3>
             
             <div className="space-y-6">
               <div className="flex items-start">
                 <div className="mt-1 mr-4 flex-shrink-0">
-                  <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full text-blue-600 dark:text-blue-400">
+                  <div className="p-3 bg-gradient-to-br from-brand-500 to-accent-cyan rounded-xl text-white shadow-lg shadow-brand-500/20">
                     <Mail size={20} />
                   </div>
                 </div>
                 <div>
-                  <h4 className="text-base font-medium text-slate-900 dark:text-white mb-1">
+                  <h4 className="text-base font-semibold text-neutral-900 dark:text-white mb-1">
                     {t('contact.email')}
                   </h4>
-                  <p className="text-slate-600 dark:text-slate-400">
+                  <p className="text-neutral-600 dark:text-neutral-400">
                     yazid.slimani@ensia.edu.dz
                   </p>
                 </div>
@@ -145,7 +145,7 @@ const ContactSection: React.FC = () => {
               
               <div className="flex items-start">
                 <div className="mt-1 mr-4 flex-shrink-0">
-                  <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full text-blue-600 dark:text-blue-400">
+                  <div className="p-3 bg-gradient-to-br from-brand-500 to-accent-cyan rounded-xl text-white shadow-lg shadow-brand-500/20">
                     <Phone size={20} />
                   </div>
                 </div>
@@ -161,7 +161,7 @@ const ContactSection: React.FC = () => {
               
               <div className="flex items-start">
                 <div className="mt-1 mr-4 flex-shrink-0">
-                  <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full text-blue-600 dark:text-blue-400">
+                  <div className="p-3 bg-gradient-to-br from-brand-500 to-accent-cyan rounded-xl text-white shadow-lg shadow-brand-500/20">
                     <MapPin size={20} />
                   </div>
                 </div>
@@ -178,8 +178,8 @@ const ContactSection: React.FC = () => {
           </div>
           
           {/* Contact Form */}
-          <div className="lg:col-span-3 bg-white dark:bg-slate-900 rounded-xl shadow-sm p-6 md:p-8">
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">
+          <div className="lg:col-span-3 bg-white dark:bg-neutral-950 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-lg p-6 md:p-8">
+            <h3 className="text-2xl font-display font-bold text-neutral-900 dark:text-white mb-8">
               {t('contact.sendMessage')}
             </h3>
             
@@ -212,8 +212,8 @@ const ContactSection: React.FC = () => {
                       className={`w-full px-4 py-2 rounded-lg border ${
                         errors.name 
                           ? 'border-red-500 dark:border-red-500 focus:border-red-500 dark:focus:border-red-500 focus:ring-red-500 dark:focus:ring-red-500' 
-                          : 'border-slate-300 dark:border-slate-600 focus:border-blue-500 dark:focus:border-blue-500 focus:ring-blue-500 dark:focus:ring-blue-500'
-                      } bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50 transition-colors`}
+                          : 'border-neutral-300 dark:border-neutral-700 focus:border-brand-500 dark:focus:border-brand-500 focus:ring-brand-500 dark:focus:ring-brand-500'
+                      } bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50 transition-colors`}
                       placeholder={t('contact.form.namePlaceholder')}
                     />
                     {errors.name && (
@@ -237,8 +237,8 @@ const ContactSection: React.FC = () => {
                       className={`w-full px-4 py-2 rounded-lg border ${
                         errors.email 
                           ? 'border-red-500 dark:border-red-500 focus:border-red-500 dark:focus:border-red-500 focus:ring-red-500 dark:focus:ring-red-500' 
-                          : 'border-slate-300 dark:border-slate-600 focus:border-blue-500 dark:focus:border-blue-500 focus:ring-blue-500 dark:focus:ring-blue-500'
-                      } bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50 transition-colors`}
+                          : 'border-neutral-300 dark:border-neutral-700 focus:border-brand-500 dark:focus:border-brand-500 focus:ring-brand-500 dark:focus:ring-brand-500'
+                      } bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50 transition-colors`}
                       placeholder={t('contact.form.emailPlaceholder')}
                     />
                     {errors.email && (
@@ -260,7 +260,7 @@ const ContactSection: React.FC = () => {
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-600 focus:border-blue-500 dark:focus:border-blue-500 focus:ring-blue-500 dark:focus:ring-blue-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50 transition-colors"
+                    className="w-full px-4 py-2 rounded-lg border border-neutral-300 dark:border-neutral-700 focus:border-brand-500 dark:focus:border-brand-500 focus:ring-brand-500 dark:focus:ring-brand-500 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50 transition-colors"
                     placeholder={t('contact.form.subjectPlaceholder')}
                   />
                 </div>
@@ -281,8 +281,8 @@ const ContactSection: React.FC = () => {
                     className={`w-full px-4 py-2 rounded-lg border ${
                       errors.message 
                         ? 'border-red-500 dark:border-red-500 focus:border-red-500 dark:focus:border-red-500 focus:ring-red-500 dark:focus:ring-red-500' 
-                        : 'border-slate-300 dark:border-slate-600 focus:border-blue-500 dark:focus:border-blue-500 focus:ring-blue-500 dark:focus:ring-blue-500'
-                    } bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50 transition-colors`}
+                        : 'border-neutral-300 dark:border-neutral-700 focus:border-brand-500 dark:focus:border-brand-500 focus:ring-brand-500 dark:focus:ring-brand-500'
+                    } bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50 transition-colors`}
                     placeholder={t('contact.form.messagePlaceholder')}
                   ></textarea>
                   {errors.message && (
@@ -293,10 +293,10 @@ const ContactSection: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full px-6 py-3 text-white font-medium rounded-lg shadow-sm transition-all 
-                    ${isSubmitting 
-                      ? 'bg-blue-400 dark:bg-blue-500 cursor-not-allowed' 
-                      : 'bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'
+                  className={`w-full px-6 py-4 text-white font-semibold rounded-2xl shadow-lg transition-all
+                    ${isSubmitting
+                      ? 'bg-neutral-400 dark:bg-neutral-600 cursor-not-allowed'
+                      : 'bg-gradient-to-r from-brand-500 to-accent-cyan hover:shadow-brand-500/50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-opacity-50'
                     }`}
                 >
                   <span className="flex items-center justify-center">

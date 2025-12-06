@@ -35,7 +35,7 @@ const QuoteGenerator: React.FC = () => {
   }, []);
   
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm p-6 md:p-8 hover:shadow-md transition-shadow">
+    <div className="bg-white dark:bg-neutral-950 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-lg p-6 md:p-8 hover:shadow-xl transition-all">
       <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center">
         <BrainCircuit size={24} className="mr-2 text-blue-600 dark:text-blue-400" />
         AI Quote Generator
@@ -156,7 +156,7 @@ print(f"Class probabilities: {predictions}")`
   };
   
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm p-6 md:p-8 hover:shadow-md transition-shadow">
+    <div className="bg-white dark:bg-neutral-950 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-lg p-6 md:p-8 hover:shadow-xl transition-all">
       <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center">
         <Terminal size={24} className="mr-2 text-blue-600 dark:text-blue-400" />
         {snippet.title} <span className="ml-2 text-sm font-normal text-blue-600 dark:text-blue-400">({snippet.language})</span>
@@ -170,7 +170,7 @@ print(f"Class probabilities: {predictions}")`
       
       <button
         onClick={cycleSnippet}
-        className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+        className="w-full py-3 px-4 bg-gradient-to-r from-brand-500 to-accent-cyan hover:shadow-lg hover:shadow-brand-500/30 text-white font-medium rounded-xl transition-all"
       >
         Next Code Snippet
       </button>
@@ -241,7 +241,7 @@ const TicTacToe: React.FC = () => {
   };
   
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm p-6 md:p-8 hover:shadow-md transition-shadow">
+    <div className="bg-white dark:bg-neutral-950 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-lg p-6 md:p-8 hover:shadow-xl transition-all">
       <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">
         Tic Tac Toe
       </h3>
@@ -268,7 +268,7 @@ const TicTacToe: React.FC = () => {
       
       <button
         onClick={resetGame}
-        className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+        className="w-full py-3 px-4 bg-gradient-to-r from-brand-500 to-accent-cyan hover:shadow-lg hover:shadow-brand-500/30 text-white font-medium rounded-xl transition-all"
       >
         Reset Game
       </button>
@@ -308,7 +308,7 @@ const GuessTheTerm: React.FC = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm p-6 md:p-8 hover:shadow-md transition-shadow">
+    <div className="bg-white dark:bg-neutral-950 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-lg p-6 md:p-8 hover:shadow-xl transition-all">
       <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center">
         <Smile size={24} className="mr-2 text-blue-600 dark:text-blue-400" />
         Guess the AI Term
@@ -326,7 +326,7 @@ const GuessTheTerm: React.FC = () => {
 
       <button
         onClick={handleGuess}
-        className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+        className="w-full py-3 px-4 bg-gradient-to-r from-brand-500 to-accent-cyan hover:shadow-lg hover:shadow-brand-500/30 text-white font-medium rounded-xl transition-all"
       >
         Submit Guess
       </button>
@@ -340,11 +340,11 @@ const GuessTheTerm: React.FC = () => {
 
 const FunSection: React.FC = () => {
   return (
-    <section id="fun" className="py-20 bg-white dark:bg-slate-900 transition-colors duration-300">
+    <section id="fun" className="py-24 bg-neutral-50 dark:bg-neutral-900 transition-colors duration-300">
       <div className="container mx-auto px-4 md:px-6">
-        <SectionHeading 
-          title="Just For Fun" 
-          subtitle="Take a break and enjoy these interactive elements." 
+        <SectionHeading
+          title="Just For Fun"
+          subtitle="Take a break and enjoy these interactive elements."
           align="center"
         />
         
