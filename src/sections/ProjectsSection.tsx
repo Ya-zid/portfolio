@@ -328,7 +328,7 @@ const LiveStudyRoom = () => {
     descriptionKey: 'projects.base360.description',
     image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080&h=720',
     tags: ['React', 'FastAPI', 'Tailwind CSS', 'Full-Stack', 'SaaS'],
-    url: 'https://base360.com',
+    url: 'https://base360.ai',
     github: 'https://github.com/example/base360-portal',
     isPrivateRepo: true,
     codeSnippet: `
