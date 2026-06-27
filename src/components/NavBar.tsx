@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Moon, Sun, Menu, X, Globe } from 'lucide-react';
+import { Moon, Sun, Menu, X } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -8,210 +8,119 @@ const NavBar: React.FC = () => {
   const { language, toggleLanguage, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 8);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const sections = [
+    { id: 'work', label: t('nav.projects') },
+    { id: 'experience', label: t('nav.experience') },
+    { id: 'skills', label: t('nav.skills') },
+    { id: 'contact', label: t('nav.contact') },
+  ];
+
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setMobileMenuOpen(false);
-    }
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setMobileMenuOpen(false);
+  };
+
+  const scrollTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setMobileMenuOpen(false);
   };
 
   return (
     <nav
-      className={`fixed w-full top-4 z-50 transition-all duration-500 ${
-        isScrolled ? 'top-2' : 'top-4'
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        isScrolled
+          ? 'border-b border-ink-200/70 bg-white/80 backdrop-blur-md dark:border-ink-800 dark:bg-ink-950/80'
+          : 'border-b border-transparent bg-transparent'
       }`}
     >
-      <div className="container mx-auto px-4 md:px-6">
-        <div className={`${
-          isScrolled
-            ? 'glass-effect shadow-glass-lg'
-            : 'bg-white/60 dark:bg-neutral-900/60 backdrop-blur-md'
-          } rounded-3xl px-6 py-3 transition-all duration-500`}
+      <div className="mx-auto flex max-w-content items-center justify-between px-6 py-4 md:px-10">
+        <button
+          onClick={scrollTop}
+          className="font-display text-base font-semibold tracking-tight text-ink-900 transition-colors hover:text-accent dark:text-white dark:hover:text-accent-light"
         >
-          <div className="flex justify-between items-center">
-            <a
-              href="#"
-              className="group flex items-center gap-2 text-lg md:text-xl font-display font-bold text-neutral-900 dark:text-white transition-all duration-300"
-              onClick={(e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-            >
-              <span className='text-gradient group-hover:scale-110 transition-transform duration-300'> {"<"}</span>
-              <span className="group-hover:text-gradient transition-all duration-300">YS</span>
-              <span className='text-gradient group-hover:scale-110 transition-transform duration-300'> {"/>"}</span>
-            </a>
+          Yazid Slimani
+        </button>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-2">
+        {/* Desktop */}
+        <div className="hidden items-center gap-1 md:flex">
+          {sections.map((s) => (
             <button
-              onClick={() => scrollToSection('projects')}
-              className="px-4 py-2 rounded-xl text-neutral-700 dark:text-neutral-300 hover:bg-brand-50 dark:hover:bg-brand-950 hover:text-brand-600 dark:hover:text-brand-400 font-medium transition-all duration-300"
+              key={s.id}
+              onClick={() => scrollToSection(s.id)}
+              className="rounded-md px-3 py-2 text-sm font-medium text-ink-500 transition-colors hover:text-ink-900 dark:text-ink-300 dark:hover:text-white"
             >
-              {t('nav.projects')}
+              {s.label}
             </button>
-            <button
-              onClick={() => scrollToSection('experience')}
-              className="px-4 py-2 rounded-xl text-neutral-700 dark:text-neutral-300 hover:bg-brand-50 dark:hover:bg-brand-950 hover:text-brand-600 dark:hover:text-brand-400 font-medium transition-all duration-300"
-            >
-              {t('nav.experience')}
-            </button>
-            <button
-              onClick={() => scrollToSection('skills')}
-              className="px-4 py-2 rounded-xl text-neutral-700 dark:text-neutral-300 hover:bg-brand-50 dark:hover:bg-brand-950 hover:text-brand-600 dark:hover:text-brand-400 font-medium transition-all duration-300"
-            >
-              {t('nav.skills')}
-            </button>
-            <button
-              onClick={() => scrollToSection('contact')}
-              className="px-4 py-2 rounded-xl bg-gradient-to-r from-brand-500 to-accent-cyan text-white font-semibold shadow-lg shadow-brand-500/30 hover:shadow-brand-500/50 transition-all duration-300"
-            >
-              {t('nav.contact')}
-            </button>
+          ))}
 
-            {/* Language Toggle */}
-            <div className="relative">
-              <button
-                onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
-                className="p-2.5 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 hover:bg-brand-50 dark:hover:bg-brand-950 hover:text-brand-600 dark:hover:text-brand-400 transition-all duration-300 flex items-center gap-1"
-                aria-label="Change language"
-              >
-                <Globe size={18} />
-                <span className="text-sm font-medium">{language.toUpperCase()}</span>
-              </button>
+          <div className="mx-2 h-5 w-px bg-ink-200 dark:bg-ink-800" />
 
-              {languageMenuOpen && (
-                <div className="absolute top-full right-0 mt-2 glass-effect rounded-2xl shadow-glass overflow-hidden min-w-[120px]">
-                  <button
-                    onClick={() => {
-                      if (language !== 'en') toggleLanguage();
-                      setLanguageMenuOpen(false);
-                    }}
-                    className={`block w-full text-left px-4 py-2.5 ${language === 'en' ? 'text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-brand-950' : 'text-neutral-700 dark:text-neutral-200'} hover:bg-brand-50 dark:hover:bg-brand-950 transition-colors font-medium`}
-                  >
-                    English
-                  </button>
-                  <button
-                    onClick={() => {
-                      if (language !== 'fr') toggleLanguage();
-                      setLanguageMenuOpen(false);
-                    }}
-                    className={`block w-full text-left px-4 py-2.5 ${language === 'fr' ? 'text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-brand-950' : 'text-neutral-700 dark:text-neutral-200'} hover:bg-brand-50 dark:hover:bg-brand-950 transition-colors font-medium`}
-                  >
-                    Français
-                  </button>
-                </div>
-              )}
-            </div>
+          <button
+            onClick={toggleLanguage}
+            className="rounded-md px-2.5 py-2 font-mono text-xs font-medium text-ink-500 transition-colors hover:text-ink-900 dark:text-ink-300 dark:hover:text-white"
+            aria-label="Toggle language"
+          >
+            {language.toUpperCase()}
+          </button>
 
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="p-2.5 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 hover:bg-brand-50 dark:hover:bg-brand-950 hover:text-brand-600 dark:hover:text-brand-400 transition-all duration-300"
-              aria-label="Toggle theme"
-            >
-              {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
-            </button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="flex items-center md:hidden space-x-2">
-            {/* Language Toggle Mobile */}
-            <div className="relative">
-              <button
-                onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
-                className="p-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200"
-                aria-label="Change language"
-              >
-                <Globe size={18} />
-              </button>
-
-              {languageMenuOpen && (
-                <div className="absolute top-full right-0 mt-2 glass-effect rounded-2xl shadow-glass overflow-hidden min-w-[120px]">
-                  <button
-                    onClick={() => {
-                      if (language !== 'en') toggleLanguage();
-                      setLanguageMenuOpen(false);
-                    }}
-                    className={`block w-full text-left px-4 py-2.5 ${language === 'en' ? 'text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-brand-950' : 'text-neutral-700 dark:text-neutral-200'} hover:bg-brand-50 dark:hover:bg-brand-950 transition-colors font-medium`}
-                  >
-                    English
-                  </button>
-                  <button
-                    onClick={() => {
-                      if (language !== 'fr') toggleLanguage();
-                      setLanguageMenuOpen(false);
-                    }}
-                    className={`block w-full text-left px-4 py-2.5 ${language === 'fr' ? 'text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-brand-950' : 'text-neutral-700 dark:text-neutral-200'} hover:bg-brand-50 dark:hover:bg-brand-950 transition-colors font-medium`}
-                  >
-                    Français
-                  </button>
-                </div>
-              )}
-            </div>
-
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200"
-              aria-label="Toggle theme"
-            >
-              {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
-            </button>
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-neutral-700 dark:text-neutral-200"
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          </div>
-        </div>
+          <button
+            onClick={toggleTheme}
+            className="rounded-md p-2 text-ink-500 transition-colors hover:text-ink-900 dark:text-ink-300 dark:hover:text-white"
+            aria-label="Toggle theme"
+          >
+            {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+          </button>
         </div>
 
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="mt-3 glass-effect rounded-3xl shadow-glass p-4">
-            <div className="flex flex-col space-y-2">
-              <button
-                onClick={() => scrollToSection('projects')}
-                className="px-4 py-3 rounded-xl text-left text-neutral-700 dark:text-neutral-200 hover:bg-brand-50 dark:hover:bg-brand-950 hover:text-brand-600 dark:hover:text-brand-400 font-medium transition-all"
-              >
-                {t('nav.projects')}
-              </button>
-              <button
-                onClick={() => scrollToSection('experience')}
-                className="px-4 py-3 rounded-xl text-left text-neutral-700 dark:text-neutral-200 hover:bg-brand-50 dark:hover:bg-brand-950 hover:text-brand-600 dark:hover:text-brand-400 font-medium transition-all"
-              >
-                {t('nav.experience')}
-              </button>
-              <button
-                onClick={() => scrollToSection('skills')}
-                className="px-4 py-3 rounded-xl text-left text-neutral-700 dark:text-neutral-200 hover:bg-brand-50 dark:hover:bg-brand-950 hover:text-brand-600 dark:hover:text-brand-400 font-medium transition-all"
-              >
-                {t('nav.skills')}
-              </button>
-              <button
-                onClick={() => scrollToSection('contact')}
-                className="px-4 py-3 rounded-xl text-left bg-gradient-to-r from-brand-500 to-accent-cyan text-white font-semibold shadow-lg shadow-brand-500/30 transition-all"
-              >
-                {t('nav.contact')}
-              </button>
-            </div>
-          </div>
-        )}
+        {/* Mobile controls */}
+        <div className="flex items-center gap-1 md:hidden">
+          <button
+            onClick={toggleLanguage}
+            className="rounded-md px-2.5 py-2 font-mono text-xs font-medium text-ink-500 dark:text-ink-300"
+            aria-label="Toggle language"
+          >
+            {language.toUpperCase()}
+          </button>
+          <button
+            onClick={toggleTheme}
+            className="rounded-md p-2 text-ink-500 dark:text-ink-300"
+            aria-label="Toggle theme"
+          >
+            {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+          </button>
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="rounded-md p-2 text-ink-700 dark:text-ink-200"
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile menu */}
+      {mobileMenuOpen && (
+        <div className="border-t border-ink-200/70 bg-white/95 backdrop-blur-md md:hidden dark:border-ink-800 dark:bg-ink-950/95">
+          <div className="mx-auto flex max-w-content flex-col px-6 py-2">
+            {sections.map((s) => (
+              <button
+                key={s.id}
+                onClick={() => scrollToSection(s.id)}
+                className="py-3 text-left text-sm font-medium text-ink-600 transition-colors hover:text-ink-900 dark:text-ink-300 dark:hover:text-white"
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

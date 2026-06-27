@@ -11,39 +11,53 @@ interface LanguageContextType {
 const translations = {
   en: {
     // Navigation
-    'nav.projects': 'Projects',
+    'nav.projects': 'Work',
     'nav.experience': 'Experience',
     'nav.skills': 'Skills',
     'nav.contact': 'Contact',
     
     // Hero section
-    'hero.hello': 'Hello, I\'m',
-    'hero.building': 'Building intelligent systems.',
-    'hero.specializing': 'Specializing in AI and ML.',
-    'hero.viewProjects': 'View Projects',
-    'hero.contactMe': 'Contact Me',
+    'hero.location': 'Algiers, Algeria',
+    'hero.availability': 'Open to select work',
+    'hero.heading': 'Engineer & project lead.',
+    'hero.subheading': 'I build products and I run them. Right now that means payment infrastructure for Algeria, as project lead at BOONKA. Before, I shipped full-stack and AI products for startups and teams.',
+    'hero.viewProjects': 'View work',
+    'hero.contactMe': 'Get in touch',
 
-    'about.title': 'About Me',
-    'about.subtitle': 'Curiosity-driven. Detail-focused. Future-oriented.',
-    'about.status': 'Eager to collaborate',
-    'about.viewResume': 'VIEW RESUME',
-    'about.paragraph1': 'Hello, I\'m Yazid — an AI engineer-in-training At ENSIA Algiers, with hands-on experience in telecom systems, full-stack development, and machine learning. I\'m driven by a deep interest in building intelligent, scalable solutions that bridge theory and real-world application.',
-    'about.paragraph2': 'My mindset is a mix of precision and big-picture thinking. I\'m deeply curious, always learning, and drawn to projects that require both analytical depth and strategic foresight. Whether exploring AI, cognitive science, or design, I value thoughtful execution and purpose-driven work.',
-    'about.paragraph3': 'Currently, I\'m pursuing international research opportunities and collaborations in AI. My program at ENSIA has equipped me with a strong foundation in AI, data science, and problem-solving.',
-    'about.paragraph4': 'I\'m motivated by impact — not just building things that work, but building things that matter. If that resonates with you, we\'re already aligned.',
+    'about.title': 'About',
+    'about.lead': 'I work across the build and the business: shipping the product, then making it run.',
+    'about.viewResume': 'Download CV',
+    'about.nowLabel': 'Now',
+    'about.now1': 'Project lead, BOONKA',
+    'about.now2': 'Payment infrastructure for Algeria',
+    'about.basedLabel': 'Based in',
+    'about.paragraph1': 'I am an engineer and project lead from Algiers. I trained in AI and data science at ENSIA, and I have spent the last few years building full-stack and machine learning products, then taking ownership of the strategy, the team and the operations around them.',
+    'about.paragraph2': 'Today I am project lead at BOONKA, where we are building payment infrastructure for Algeria. Before that, I led startup programs at Algérie Télécom\'s incubator, and I founded and ran Gostu, an education platform that reached thousands of students with no outside funding.',
+    'about.paragraph3': 'I care about work that ships and that matters. I am most useful where product, technology and business meet, turning an idea into something real, reliable and used.',
 
         // Projects section
-    'projects.title': 'Projects',
-    'projects.subtitle': 'Explore some of my recent work in AI and machine learning.',
-    'projects.viewLive': 'Live Demo',
-    'projects.viewCode': 'View Code',
+    'projects.title': 'Selected work',
+    'projects.subtitle': 'A mix of products I have built and shipped, from fintech and SaaS to machine learning.',
+    'projects.viewLive': 'Live',
+    'projects.viewCode': 'Code',
+    'projects.private': 'Private',
     'projects.accessTitle': 'Repository Access',
     'projects.privateRepo': 'This project\'s source code is stored in a private organization repository and cannot be publicly shared.',
     'projects.contactForDetails': 'Feel free to contact me for more details about the implementation or to discuss potential collaboration.',
     'projects.close': 'Close',
     'projects.contactMe': 'Contact Me',
     'projects.all': 'All',
-    
+
+    // Project meta (role / type)
+    'projects.gostu.meta': 'Founder & product',
+    'projects.base360.meta': 'AI engineer',
+    'projects.jade.meta': 'Full-stack',
+    'projects.neural.meta': 'Machine learning',
+    'projects.eyecare.meta': 'Full-stack',
+    'projects.cyberbullying.meta': 'NLP',
+    'projects.semantic.meta': 'NLP',
+    'projects.medical.meta': 'Machine learning',
+
     // Project descriptions
     'projects.neural.title': 'Neural Network Threat Detection',
     'projects.neural.description': 'An intelligent system for detecting and preventing network attacks using AI and machine learning. The system analyzes traffic logs to identify malicious patterns and proactively detect anomalies in real-time.',
@@ -71,17 +85,27 @@ const translations = {
     
     // Experience section
     'experience.title': 'Experience',
-    'experience.subtitle': 'My professional journey in AI and machine learning.',
+    'experience.subtitle': 'Building products, leading teams, and running operations.',
     'experience.keyAchievements': 'Key Achievements',
     'experience.showMore': 'Show More',
     'experience.showLess': 'Show Less',
+
+    // BOONKA Experience
+    'experience.boonka.role': 'Project lead',
+    'experience.boonka.company': 'BOONKA',
+    'experience.boonka.location': 'Algiers, Algeria',
+    'experience.boonka.period': 'Dec 2025 – Present',
+    'experience.boonka.description': 'Leading product and delivery for BOONKA, a fintech building digital payment infrastructure for Algerian e-commerce.',
+    'experience.boonka.achievement1': 'Driving the product from specification toward a planned MVP launch, across product, technology, and operations.',
+    'experience.boonka.achievement2': 'Coordinating the team, external partners, and the regulatory steps required to operate as a payment provider.',
+    'experience.boonka.achievement3': 'Owning the roadmap and turning strategy into concrete, shippable milestones.',
 
     // AT Project Manager Experience
     'experience.atpm.role': 'Project Manager - Startup Incubator',
     'experience.atpm.company': 'Algérie Télécom',
     'experience.atpm.location': 'Algiers, Algeria',
-    'experience.atpm.period': 'Jun 2025 – Present',
-    'experience.atpm.description': 'Leading startup mentorship and incubation programs at Algérie Télécom\'s innovation hub, guiding entrepreneurs through various growth phases, organizing events, and fostering a thriving startup ecosystem.',
+    'experience.atpm.period': 'Jun 2025 – Dec 2025',
+    'experience.atpm.description': 'Led startup mentorship and incubation programs at Algérie Télécom\'s innovation hub, guiding entrepreneurs through various growth phases, organizing events, and fostering a thriving startup ecosystem.',
     'experience.atpm.achievement1': 'Mentoring and guiding startups through ideation, development, and scaling phases',
     'experience.atpm.achievement2': 'Organizing and coordinating startup events, workshops, and networking sessions',
     'experience.atpm.achievement3': 'Providing strategic guidance and helping startups navigate technical and business challenges',
@@ -137,8 +161,8 @@ const translations = {
     'experience.skilltell.highlight2': 'Recognized for student impact and community engagement by faculty and peers',
 
         // Skills Section
-    'skills.title': 'Skills & Technologies',
-    'skills.subtitle': 'My technical toolkit and areas of expertise.',
+    'skills.title': 'Capabilities',
+    'skills.subtitle': 'The tools I build with, and the areas I lead in.',
     'skills.beginner': 'Beginner',
     'skills.expert': 'Expert',
 
@@ -164,8 +188,8 @@ const translations = {
     'skills.other.apiDesign': 'REST API Design',
 
         // Contact Section
-    'contact.title': 'Contact Me',
-    'contact.subtitle': 'Let’s get in touch — I’d love to hear from you.',
+    'contact.title': 'Get in touch',
+    'contact.subtitle': 'Have a project, a role, or an idea worth building? I would love to hear about it.',
     'contact.getInTouch': 'Get in Touch',
     'contact.email': 'Email',
     'contact.phone': 'Phone',
@@ -206,33 +230,47 @@ const translations = {
     'nav.contact': 'Contact',
     
     // Hero section
-    'hero.hello': 'Bonjour, je suis',
-    'hero.building': 'Je développe des systèmes intelligents.',
-    'hero.specializing': 'Spécialisé en IA et ML.',
-    'hero.viewProjects': 'Voir les Projets',
-    'hero.contactMe': 'Me Contacter',
+    'hero.location': 'Alger, Algérie',
+    'hero.availability': 'Disponible pour des projets choisis',
+    'hero.heading': 'Ingénieur et chef de projet.',
+    'hero.subheading': 'Je construis des produits et je les fais tourner. En ce moment, cela veut dire bâtir l\'infrastructure de paiement de l\'Algérie, comme chef de projet de BOONKA. Avant cela, j\'ai livré des produits full-stack et IA pour des startups et des équipes.',
+    'hero.viewProjects': 'Voir les projets',
+    'hero.contactMe': 'Me contacter',
     
 
-    'about.title': 'À Propos de Moi',
-    'about.subtitle': 'Motivé par la curiosité. Attaché aux détails. Orienté vers l\'avenir.',
-    'about.status': 'Enthousiaste pour collaborer',
-    'about.viewResume': 'VOIR CV',
-    'about.paragraph1': 'Bonjour, je suis Yazid — un ingénieur en IA en formation à l\'ENSIA Alger, avec une expérience pratique dans les systèmes de télécommunication, le développement full-stack et l\'apprentissage automatique. Je suis animé par un profond intérêt pour la création de solutions intelligentes et évolutives qui relient la théorie et l\'application réelle.',
-    'about.paragraph2': 'Mon état d\'esprit est un mélange de précision et de vision globale. Je suis profondément curieux, toujours en apprentissage, et attiré par des projets qui nécessitent à la fois une profondeur analytique et une vision stratégique. Que ce soit en explorant l\'IA, les sciences cognitives ou le design, je valorise l\'exécution réfléchie et le travail axé sur l\'objectif.',
-    'about.paragraph3': 'Actuellement, je recherche des opportunités de recherche et de collaboration internationales en IA. Mon programme à l\'ENSIA m\'a doté d\'une solide formation en IA, en science des données et en résolution de problèmes.',
-    'about.paragraph4': 'Je suis motivé par l\'impact — pas seulement construire des choses qui fonctionnent, mais construire des choses qui comptent. Si cela vous parle, nous sommes déjà alignés.',
+    'about.title': 'À propos',
+    'about.lead': 'Je travaille à la fois sur le produit et sur l\'entreprise : livrer le produit, puis le faire fonctionner.',
+    'about.viewResume': 'Télécharger le CV',
+    'about.nowLabel': 'En ce moment',
+    'about.now1': 'Chef de projet, BOONKA',
+    'about.now2': 'Infrastructure de paiement pour l\'Algérie',
+    'about.basedLabel': 'Basé à',
+    'about.paragraph1': 'Je suis ingénieur et chef de projet, basé à Alger. Je me suis formé en IA et en science des données à l\'ENSIA, et j\'ai passé ces dernières années à construire des produits full-stack et de machine learning, puis à prendre en charge la stratégie, l\'équipe et les opérations qui les entourent.',
+    'about.paragraph2': 'Aujourd\'hui, je suis chef de projet chez BOONKA, où nous bâtissons l\'infrastructure de paiement de l\'Algérie. Avant cela, j\'ai dirigé des programmes pour startups à l\'incubateur d\'Algérie Télécom, et j\'ai fondé et dirigé Gostu, une plateforme éducative qui a touché des milliers d\'étudiants sans financement externe.',
+    'about.paragraph3': 'J\'attache de l\'importance au travail qui aboutit et qui compte. Je suis le plus utile là où le produit, la technologie et le business se rencontrent : transformer une idée en quelque chose de réel, fiable et utilisé.',
 
-    'projects.title': 'Projets',
-    'projects.subtitle': 'Découvrez certains de mes travaux récents en IA et en apprentissage automatique.',
-    'projects.viewLive': 'Démo en Direct',
-    'projects.viewCode': 'Voir le Code',
+    'projects.title': 'Travaux sélectionnés',
+    'projects.subtitle': 'Un éventail de produits que j\'ai construits et livrés, de la fintech au SaaS jusqu\'au machine learning.',
+    'projects.viewLive': 'En ligne',
+    'projects.viewCode': 'Code',
+    'projects.private': 'Privé',
     'projects.accessTitle': 'Accès au Dépôt',
     'projects.privateRepo': 'Le code source de ce projet est stocké dans un dépôt privé d\'organisation et ne peut pas être partagé publiquement.',
     'projects.contactForDetails': 'N\'hésitez pas à me contacter pour plus de détails sur l\'implémentation ou pour discuter d\'une éventuelle collaboration.',
     'projects.close': 'Fermer',
     'projects.contactMe': 'Me Contacter',
     'projects.all': 'Tous',
-    
+
+    // Project meta (role / type)
+    'projects.gostu.meta': 'Fondateur & produit',
+    'projects.base360.meta': 'Ingénieur IA',
+    'projects.jade.meta': 'Full-stack',
+    'projects.neural.meta': 'Machine learning',
+    'projects.eyecare.meta': 'Full-stack',
+    'projects.cyberbullying.meta': 'NLP',
+    'projects.semantic.meta': 'NLP',
+    'projects.medical.meta': 'Machine learning',
+
     // Project descriptions
     'projects.neural.title': 'Détection de Menaces par Réseau Neuronal',
     'projects.neural.description': 'Un système intelligent pour détecter et prévenir les attaques réseau en utilisant l\'IA et l\'apprentissage automatique. Le système analyse les journaux de trafic pour identifier les modèles malveillants et détecter de manière proactive les anomalies en temps réel.',
@@ -260,16 +298,26 @@ const translations = {
 
 // Experience section
     'experience.title': 'Expérience',
-    'experience.subtitle': 'Mon parcours professionnel en IA et en apprentissage automatique.',
+    'experience.subtitle': 'Construire des produits, diriger des équipes et gérer les opérations.',
     'experience.keyAchievements': 'Réalisations Clés',
     'experience.showMore': 'Voir Plus',
     'experience.showLess': 'Voir Moins',
+
+    // BOONKA Experience
+    'experience.boonka.role': 'Chef de projet',
+    'experience.boonka.company': 'BOONKA',
+    'experience.boonka.location': 'Alger, Algérie',
+    'experience.boonka.period': 'Déc 2025 – Présent',
+    'experience.boonka.description': 'Direction du produit et de la livraison pour BOONKA, une fintech qui construit l\'infrastructure de paiement numérique pour l\'e-commerce algérien.',
+    'experience.boonka.achievement1': 'Pilotage du produit, de la spécification jusqu\'au lancement prévu du MVP, à travers le produit, la technologie et les opérations.',
+    'experience.boonka.achievement2': 'Coordination de l\'équipe, des partenaires externes et des étapes réglementaires nécessaires pour opérer comme prestataire de paiement.',
+    'experience.boonka.achievement3': 'Prise en charge de la feuille de route et transformation de la stratégie en jalons concrets et livrables.',
 
     // AT Project Manager Experience
     'experience.atpm.role': 'Chef de Projet - Incubateur de Startups',
     'experience.atpm.company': 'Algérie Télécom',
     'experience.atpm.location': 'Alger, Algérie',
-    'experience.atpm.period': 'Juin 2025 – Présent',
+    'experience.atpm.period': 'Juin 2025 – Déc 2025',
     'experience.atpm.description': 'Direction des programmes de mentorat et d\'incubation de startups au hub d\'innovation d\'Algérie Télécom, guidant les entrepreneurs à travers diverses phases de croissance, organisant des événements et favorisant un écosystème de startups florissant.',
     'experience.atpm.achievement1': 'Mentorat et accompagnement de startups à travers les phases d\'idéation, de développement et d\'échelle',
     'experience.atpm.achievement2': 'Organisation et coordination d\'événements, d\'ateliers et de sessions de réseautage pour startups',
@@ -326,8 +374,8 @@ const translations = {
     'experience.skilltell.highlight2': 'Reconnu pour l\'impact sur les étudiants et l\'engagement communautaire par la faculté et les pairs',
  
         // Skills Section
-    'skills.title': 'Compétences & Technologies',
-    'skills.subtitle': 'Mon ensemble d\'outils techniques et domaines d\'expertise.',
+    'skills.title': 'Compétences',
+    'skills.subtitle': 'Les outils avec lesquels je construis, et les domaines où je dirige.',
     'skills.beginner': 'Débutant',
     'skills.expert': 'Expert',
 
@@ -353,8 +401,8 @@ const translations = {
     'skills.other.apiDesign': 'Conception d\'API REST',
 
         // Contact Section
-    'contact.title': 'Me Contacter',
-    'contact.subtitle': 'Entrons en contact — j’aimerais avoir de vos nouvelles.',
+    'contact.title': 'Me contacter',
+    'contact.subtitle': 'Un projet, un poste ou une idée à construire ? J\'aimerais en entendre parler.',
     'contact.getInTouch': 'Entrer en contact',
     'contact.email': 'Email',
     'contact.phone': 'Téléphone',

@@ -3,32 +3,29 @@ import { ThemeProvider } from './context/ThemeContext';
 import { LanguageProvider } from './context/LanguageContext';
 import NavBar from './components/NavBar';
 import HeroSection from './sections/HeroSection';
+import AboutSection from './sections/AboutSection';
 import ProjectsSection from './sections/ProjectsSection';
 import ExperienceSection from './sections/ExperienceSection';
 import SkillsSection from './sections/SkillsSection';
 import ContactSection from './sections/ContactSection';
 import Footer from './components/Footer';
-import FunSection from './sections/FunSection';
-import AboutSection from './sections/AboutSection';
-import ScrollProgressBar from './components/ScrollProgressBar';
+
 const App: React.FC = () => {
   return (
     <ThemeProvider>
-      <ScrollProgressBar />
       <LanguageProvider>
-        <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 transition-colors duration-300">
+        <div className="min-h-screen bg-white text-ink-900 dark:bg-ink-950 dark:text-white">
           <NavBar />
-          <HeroSection />
-          <AboutSection />
-          <ProjectsSection />
-          <ExperienceSection />
-          <SkillsSection />
-          <ContactSection />
-          <FunSection />
+          <main>
+            <HeroSection />
+            <AboutSection />
+            <ProjectsSection />
+            <ExperienceSection />
+            <SkillsSection />
+            <ContactSection />
+          </main>
           <Footer />
-
         </div>
-
       </LanguageProvider>
     </ThemeProvider>
   );

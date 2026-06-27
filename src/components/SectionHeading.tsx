@@ -1,62 +1,33 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import Reveal from './Reveal';
 
 interface SectionHeadingProps {
   title: string;
+  eyebrow?: string;
+  number?: string;
   subtitle?: string;
-  align?: 'left' | 'center' | 'right';
 }
 
-const SectionHeading: React.FC<SectionHeadingProps> = ({
-  title,
-  subtitle,
-  align = 'left'
-}) => {
-  const alignmentClasses = {
-    left: 'text-left',
-    center: 'text-center',
-    right: 'text-right',
-  };
-
-  const alignItems = {
-    left: 'items-start',
-    center: 'items-center',
-    right: 'items-end',
-  };
-
+const SectionHeading: React.FC<SectionHeadingProps> = ({ title, eyebrow, number, subtitle }) => {
   return (
-    <motion.div
-      className={`mb-16 ${alignmentClasses[align]} ${alignItems[align]} flex flex-col gap-4`}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true }}
-    >
-      <motion.div
-        className="relative inline-block"
-        initial={{ opacity: 0, x: align === 'right' ? 20 : align === 'left' ? -20 : 0 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-        viewport={{ once: true }}
-      >
-        <h2 className="text-4xl md:text-5xl font-display font-bold text-neutral-900 dark:text-white relative z-10">
-          {title}
-        </h2>
-        {/* Decorative gradient underline */}
-        <div className="absolute -bottom-2 left-0 w-20 h-1 bg-gradient-to-r from-brand-500 to-accent-cyan rounded-full" />
-      </motion.div>
+    <Reveal className="mb-12 md:mb-16">
+      <div className="flex items-center gap-3">
+        {number && (
+          <span className="font-mono text-xs text-accent dark:text-accent-light">{number}</span>
+        )}
+        {eyebrow && (
+          <span className="font-mono text-xs uppercase tracking-label text-ink-400">{eyebrow}</span>
+        )}
+      </div>
+      <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink-900 dark:text-white sm:text-4xl">
+        {title}
+      </h2>
       {subtitle && (
-        <motion.p
-          className="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
+        <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-500 dark:text-ink-300">
           {subtitle}
-        </motion.p>
+        </p>
       )}
-    </motion.div>
+    </Reveal>
   );
 };
 
