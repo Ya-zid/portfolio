@@ -112,17 +112,6 @@ const ProjectRow: React.FC<{ project: Project; index: number }> = ({ project, in
         </div>
 
         <div className="flex flex-row gap-4 md:flex-col md:items-end md:gap-3">
-          {project.url && (
-            <a
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-sm font-medium text-ink-900 transition-colors hover:text-accent dark:text-white dark:hover:text-accent-light"
-            >
-              {t('projects.viewLive')}
-              <ArrowUpRight size={15} />
-            </a>
-          )}
           {project.github && !project.isPrivateRepo && (
             <a
               href={project.github}
